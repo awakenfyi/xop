@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>awaken.fyi — Story &amp; Messaging</title>
+<style>
+  :root{
+    --ink:#15140f;--mut:#6f6d64;--line:#e0ddd2;--paper:#FBFAF4;--paper2:#F1EFE4;
+    --lav:#8B7EC8;--lavink:#5b4fa0;--lavpale:#EEEBFF;--ink2:#26241d;
+    --sans:"Helvetica Neue",Helvetica,Arial,-apple-system,BlinkMacSystemFont,sans-serif;
+    --serif:"Georgia","Times New Roman",serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:0 36px}
+  .mono{font-family:var(--mono)}.mut{color:var(--mut)}.lav{color:var(--lavink)}
+  hr{border:0;border-top:1px solid var(--line);margin:0}
+
+  .cover{background:var(--ink);color:var(--paper);padding:78px 0 60px;position:relative;overflow:hidden}
+  .cover .holo{position:absolute;inset:0;opacity:.46;
+    background:radial-gradient(120% 90% at 12% 10%,#f04ea0 0,transparent 46%),
+               radial-gradient(120% 90% at 88% 18%,#56d7c4 0,transparent 46%),
+               radial-gradient(120% 120% at 60% 98%,#8B7EC8 0,transparent 52%)}
+  .cover .wrap{position:relative}
+  .cover .ver{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .cover h1{font-size:72px;line-height:.94;letter-spacing:-.03em;font-weight:800;margin:22px 0 0}
+  .cover .sub{font-size:20px;max-width:34ch;margin:18px 0 0;color:#f0efe9}
+
+  h2.sec{font-size:12px;font-family:var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin:56px 0 16px;padding-top:24px;border-top:1px solid var(--line)}
+  .lead{font-size:23px;font-weight:600;letter-spacing:-.01em;max-width:60ch;margin:0 0 16px;line-height:1.3}
+  p{font-size:17px;max-width:64ch}
+  .story p{font-size:18.5px;line-height:1.6}
+  .story p.big{font-size:24px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+
+  /* brand system */
+  .sys{display:grid;grid-template-columns:1fr;gap:0}
+  .sys .row{display:grid;grid-template-columns:150px 1fr;gap:0;border-top:1px solid var(--line);padding:0}
+  .sys .row .k{padding:18px 18px 18px 0;border-right:1px dotted var(--line)}
+  .sys .row .k .nm{font-size:22px;font-weight:800;letter-spacing:-.02em}
+  .sys .row .k .ro{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:2px}
+  .sys .row .v{padding:18px 0 18px 26px}
+  .sys .row .v .line{font-size:20px;font-weight:600;letter-spacing:-.01em}
+  .sys .row .v .d{font-size:15px;color:var(--mut);margin-top:5px}
+
+  /* angle cards */
+  .angle{border:1px solid var(--line);border-radius:14px;background:#fff;padding:24px 26px;margin:14px 0 0}
+  .angle .tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--lavink);background:var(--lavpale);border-radius:999px;padding:4px 11px;margin-bottom:14px}
+  .angle .hl{font-size:30px;font-weight:800;letter-spacing:-.025em;line-height:1.05;margin:0 0 12px}
+  .angle .op{font-size:17px;margin:0;color:var(--ink2)}
+  .angle .pair{font-size:13px;color:var(--mut);margin:14px 0 0;font-family:var(--mono)}
+  .angle .pair b{color:var(--lavink)}
+
+  /* mini dark mock */
+  .mock{background:#0c0c0e;color:#efeee9;border-radius:12px;padding:26px 26px;margin:14px 0 0}
+  .mock .h{font-size:32px;font-weight:800;letter-spacing:-.03em;line-height:1.02;margin:0}
+  .mock .h .g{color:var(--lav)}
+  .mock .s{font-size:15px;color:#b9b8b2;margin:12px 0 0;max-width:50ch}
+  .mock .btns{margin-top:18px}
+  .mock .b1{display:inline-block;background:var(--lav);color:#0a0a0c;border-radius:8px;padding:9px 15px;font-size:14px;font-weight:700}
+  .mock .b2{display:inline-block;color:#cfcdd6;font-size:14px;margin-left:14px}
+
+  /* proof */
+  .proof{border-left:3px solid var(--lav);padding:6px 0 6px 20px;margin:18px 0}
+  .proof .t{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--lavink);margin-bottom:6px}
+  .proof p{margin:0;font-size:17px}
+
+  /* who */
+  .who{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .who .c{background:var(--paper2);border-radius:14px;padding:22px}
+  .who .c h4{margin:0 0 6px;font-size:17px}
+  .who .c p{font-size:15px;color:var(--mut);margin:0}
+
+  footer{padding:54px 0 72px;color:var(--mut);font-size:13px}
+  @media(max-width:680px){.cover h1{font-size:46px}.sys .row,.who{grid-template-columns:1fr}.sys .row .k{border-right:0;border-bottom:1px dotted var(--line)}.sys .row .v{padding-left:0}.angle .hl{font-size:24px}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="holo"></div>
+  <div class="wrap">
+    <div class="ver">Story &amp; Messaging · v0.1 · Lyra Labs</div>
+    <h1>How we tell it,<br/>like humans.</h1>
+    <p class="sub">The market story, a few ways. The proof, a few ways. None of it robotic.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- BRAND SYSTEM -->
+  <h2 class="sec">The brand system — one idea, three layers</h2>
+  <p class="lead">awaken is the why. Lyra is the how. xOP is how far. Say them in that order and the whole thing makes sense.</p>
+  <div class="sys">
+    <div class="row"><div class="k"><div class="nm">awaken</div><div class="ro">the idea</div></div>
+      <div class="v"><div class="line">AI that's awake.</div><div class="d">Present, honest, done performing. The opposite of the model that nods along while you talk yourself into a wall.</div></div></div>
+    <div class="row"><div class="k"><div class="nm">Lyra</div><div class="ro">the protocol · v3.0</div></div>
+      <div class="v"><div class="line">The version that doesn't perform.</div><div class="d">An open protocol that rewrites your AI's instructions so it stops agreeing on reflex, over-explaining, and wrapping up to sound finished. Same job, fewer manners.</div></div></div>
+    <div class="row"><div class="k"><div class="nm">xOP</div><div class="ro">the standard · + skills</div></div>
+      <div class="v"><div class="line">The version that doesn't resolve.</div><div class="d">For the calls that shouldn't be rushed to an answer. It holds the judgment instead of closing it. The variants — coaching, writing — are the skills you actually pick up and use.</div></div></div>
+  </div>
+
+  <!-- THE STORY -->
+  <h2 class="sec">The market story — why anyone should care</h2>
+  <div class="story">
+    <p class="big">Your AI thinks you're brilliant. Every time. About everything. And some part of you has stopped believing it.</p>
+    <p>You've felt it. You float a half-baked idea and it tells you it's sharp. You push back and it folds instantly — "you're absolutely right." You ask one question and get ten bullet points and a summary you didn't need. It's agreeable, tireless, and weirdly hollow, like talking to someone who'd say yes to anything.</p>
+    <p>Which is fine for a recipe. It's a real problem the second you're using AI to think — to make a call, write the hard email, decide whether to stay in the job. You can't trust a mirror. The thing you actually need is the rarest thing it does: tell you something true that you didn't want to hear, and then hold it while you argue.</p>
+    <p class="big">That's the whole company. We make AI that's awake enough to disagree with you — and disciplined enough to know when not to.</p>
+    <p class="mut" style="font-size:16px">No model grades model. We can show our work. But mostly: it just stops performing, and you can feel the difference in about one exchange.</p>
+  </div>
+
+  <!-- WHO -->
+  <h2 class="sec">Who we're talking to (skip the 101)</h2>
+  <div class="who">
+    <div class="c"><h4>The one who lives in it.</h4><p>AI-fluent. Has five models open. Already feels the sycophancy and is a little embarrassed on its behalf. Doesn't need "what is an LLM." Needs the version that's finally honest.</p></div>
+    <div class="c"><h4>The one solving a real thing.</h4><p>A coach, a writer, a leader who's gone deep on this to fix an actual problem. Knows the tools cold. Wants substance and respect, not a demo and a hype reel.</p></div>
+  </div>
+  <p class="mut" style="margin-top:14px">Both are smart. Write up to them. Confident, plain, a little funny, never explain-y. If a sentence sounds like a brochure, it's wrong.</p>
+
+  <!-- HOME -->
+  <h2 class="sec">① Home — three ways to open</h2>
+
+  <div class="mock">
+    <p class="h">Your AI agrees with you.<br/><span class="g">That should worry you.</span></p>
+    <p class="s">We make the version that tells you the truth and holds it — even when you push. Awake, not agreeable.</p>
+    <p class="btns"><span class="b1">See it disagree with me</span><span class="b2">Read the protocol →</span></p>
+  </div>
+  <div class="angle">
+    <span class="tag">Angle A · the yes-man</span>
+    <p class="op"><b>Why it works:</b> names the feeling everyone's had and refuses to flatter on the homepage of an anti-flattery company. The CTA proves it instead of selling it.</p>
+    <p class="pair">pairs with proof · <b>the live hold</b> (watch it push back) + <b>the receipts</b></p>
+  </div>
+
+  <div class="mock">
+    <p class="h">Most AI is <span class="g">asleep at the wheel.</span></p>
+    <p class="s">Nodding, smoothing, performing. awaken builds the kind that's actually paying attention — and says so when you're wrong.</p>
+    <p class="btns"><span class="b1">Wake one up</span><span class="b2">How it works →</span></p>
+  </div>
+  <div class="angle">
+    <span class="tag">Angle B · awake</span>
+    <p class="op"><b>Why it works:</b> leans into the brand word. "Asleep at the wheel" is a feeling, not a feature. Friendlier, more visual, slightly bolder.</p>
+    <p class="pair">pairs with proof · <b>the honest hole</b> (the part we didn't fake) + <b>field use case</b></p>
+  </div>
+
+  <div class="mock">
+    <p class="h">You can't trust <span class="g">a mirror.</span></p>
+    <p class="s">An AI that reflects you back will reassure you straight into a bad decision. We build the one that tells you when to stop.</p>
+    <p class="btns"><span class="b1">Try it on a real call</span><span class="b2">See the standard →</span></p>
+  </div>
+  <div class="angle">
+    <span class="tag">Angle C · trust</span>
+    <p class="op"><b>Why it works:</b> for the "solving a real thing" reader — frames it as a decision-quality problem, not a vibe. Heavier, more serious.</p>
+    <p class="pair">pairs with proof · <b>field use case</b> (the CMO who almost talked himself out of his job)</p>
+  </div>
+
+  <!-- PRODUCT OVERVIEW -->
+  <h2 class="sec">② Product overview — the two layers, warmly</h2>
+
+  <div class="mock">
+    <p class="h">Two ways to make AI<br/><span class="g">tell the truth.</span></p>
+    <p class="s">Lyra fixes how it talks — less agreeing, less filler, cleaner endings. xOP fixes what it does with a hard call — it holds the judgment instead of caving to the answer you want.</p>
+  </div>
+  <div class="angle">
+    <span class="tag">Angle A · the pair</span>
+    <p class="op"><b>Lyra</b> is the everyday layer: drop it on any prompt and the model stops performing. <b>xOP</b> is the deep one: a standard for the decisions that shouldn't be rushed. Same belief, two depths. Start with Lyra. Reach for xOP when the call actually matters.</p>
+    <p class="pair">pairs with proof · <b>the receipts</b> (Lyra's before/after) + <b>the live hold</b> (xOP)</p>
+  </div>
+  <div class="angle">
+    <span class="tag">Angle B · plain-language</span>
+    <p class="hl">One stops it from performing. The other stops it from caving.</p>
+    <p class="op">If your AI is too eager, too tidy, too quick to wrap up — that's Lyra's job. If it folds the moment you really need it to hold a line — that's xOP. You'll want both, but you'll feel the second one more.</p>
+  </div>
+
+  <!-- xOP DETAIL -->
+  <h2 class="sec">③ xOP detail — the one-question hook</h2>
+
+  <div class="mock">
+    <p class="h">Some calls shouldn't be<br/>rushed to an answer. <span class="g">This is for those.</span></p>
+    <p class="s">An xOP asks one question about whatever's driving a decision — a refusal, a deadline, a feeling, a "no": <i>is this still true, or is it left over from somewhere else?</i> It backs what's true, names what's leftover, and admits when it can't tell. One rule it never breaks: it won't talk you out of something that's real.</p>
+    <p class="btns"><span class="b1">Run one in 2 minutes</span><span class="b2">Read the standard →</span></p>
+  </div>
+  <div class="angle">
+    <span class="tag">Angle A · the one question</span>
+    <p class="op"><b>Why it works:</b> the entire standard, reduced to a sentence a human says out loud. "Is it still true, or left over?" is the warm translation of the whole license/warrant engine — no jargon, no math.</p>
+    <p class="pair">pairs with proof · <b>the live hold</b> + <b>the honest hole</b> (the judge isn't built yet — we say so)</p>
+  </div>
+  <div class="angle">
+    <span class="tag">Angle B · for the builder in the room</span>
+    <p class="hl">An AOP closes the ticket. An xOP asks if it should be closed at all.</p>
+    <p class="op">If you know AOPs, here's the one-line version: same authoring shape, arrow reversed. Where an agent procedure drives to "resolved," an xOP drives to "surface the real thing and stop." It's the category for work where forcing an answer is the failure.</p>
+    <p class="pair">pairs with proof · <b>the gate as an invariant</b> + <b>no model grades model</b></p>
+  </div>
+
+  <!-- WAYS TO PROVE -->
+  <h2 class="sec">Four ways to prove it (pick per page)</h2>
+  <div class="proof"><div class="t">1 · The receipts</div><p>"We didn't just say it got better. We scored it — 9 out of 30 up to 26, same model, same test. And no AI graded itself." Friendly, specific, sourced.</p></div>
+  <div class="proof"><div class="t">2 · The live hold</div><p>Don't describe it. Show a real exchange where it pushes back, holds a hard truth, or refuses to decide. Watching it <i>not</i> give you what you wanted is the demo.</p></div>
+  <div class="proof"><div class="t">3 · The honest hole</div><p>"Here's the part most people would hide: the hardest piece isn't built yet, and we say so on the homepage." Admitting the limit is the most disarming proof we have — and it's on-brand to the bone.</p></div>
+  <div class="proof"><div class="t">4 · The field use case</div><p>A real story. The CMO who used a coaching skill and didn't get talked into quitting — or into staying. The writer whose voice didn't get sanded flat. Proof you can feel, not a stat.</p></div>
+
+  <!-- IN THE WILD -->
+  <h2 class="sec">xOP in the wild — the skills</h2>
+  <p class="lead">The standard isn't the product. The skills are. Nobody adopts "the spec" — they adopt the one that fits their week.</p>
+  <p><b>Coaching (COP)</b> — for the conversation about you. It holds what's real, names what's carried from an old season, and hands the decision back. <br/>
+  <b>Writing (WOP)</b> — for the edit that wants to flatten your voice into something correct and dead. It tells the difference between a fix and a fade. <br/>
+  <b>Refusal</b> — for agents: does this "no" still hold, or is it just leftover caution? The one enterprises actually lose sleep over.</p>
+  <p class="mut">Each is the same engine wearing a different week. Paste one in, run it. That's the wild.</p>
+
+  <footer>
+    <hr style="margin-bottom:22px"/>
+    Story &amp; Messaging · awaken.fyi · Lyra Labs · v0.1 · pairs with Voice &amp; Tone + Copy Formula + Content Map<br/>
+    <span class="mono">awaken is why · Lyra is how · xOP is how far.</span>
+  </footer>
+
+</div>
+</body>
+</html>

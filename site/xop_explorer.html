@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>xOP Explorer — awaken.fyi</title>
+<style>
+  :root{
+    --bg:#08080a; --panel:#101014; --panel2:#16161c; --ink:#ECECEa; --mut:#86868f;
+    --line:#222230; --lav:#9b8cf0; --lavdim:#6f63b8; --green:#5fd29a; --amber:#e6b15a; --red:#e87d7d;
+    --sans:"Helvetica Neue",Helvetica,Arial,-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5}
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  .mono{font-family:var(--mono)}.mut{color:var(--mut)}.lav{color:var(--lav)}
+
+  nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0;font-size:14px;border-bottom:1px solid var(--line)}
+  nav .brand{font-weight:700}
+  nav .links a{color:var(--mut);text-decoration:none;margin-left:20px}
+  nav .cta{background:var(--lav);color:#0a0a0c;border-radius:8px;padding:8px 14px;font-weight:600;text-decoration:none}
+
+  header{padding:64px 0 26px;text-align:center}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut)}
+  h1{font-size:60px;line-height:1.0;letter-spacing:-.025em;font-weight:600;margin:16px 0 0}
+  h1 .g{color:var(--lav)}
+  header p{font-size:19px;color:var(--mut);max-width:60ch;margin:18px auto 0}
+
+  /* why — dual audience */
+  .why{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:34px 0 10px}
+  .why .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .why .t{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lav);margin-bottom:10px}
+  .why h3{margin:0 0 8px;font-size:18px}
+  .why p{margin:0;font-size:15px;color:#c7c7cf}
+
+  /* explorer */
+  .explorer{margin:40px 0 0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel)}
+  .ex-top{display:grid;grid-template-columns:230px 1fr 320px;min-height:520px}
+  @media(max-width:980px){.ex-top{grid-template-columns:1fr}.why{grid-template-columns:1fr}h1{font-size:42px}}
+
+  /* left rail */
+  .rail{border-right:1px solid var(--line);padding:20px 14px}
+  .rail .h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);padding:0 8px 10px}
+  .variant{display:flex;align-items:center;gap:12px;padding:12px 10px;border-radius:10px;cursor:pointer;color:var(--mut)}
+  .variant:hover{background:var(--panel2)}
+  .variant.on{background:var(--panel2);color:var(--ink)}
+  .variant .dot{width:26px;height:26px;border-radius:7px;background:#1d1d26;display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--lav);border:1px solid var(--line)}
+  .variant .nm{font-weight:600;font-size:15px}
+  .variant .sub{font-size:11px;color:var(--mut)}
+  .variant.soon{opacity:.45;cursor:not-allowed}
+
+  /* center */
+  .stage{padding:18px 22px;display:flex;flex-direction:column}
+  .tabs{display:flex;gap:6px;margin-bottom:14px}
+  .tab{font-family:var(--mono);font-size:12px;color:var(--mut);padding:7px 12px;border-radius:7px;cursor:pointer;border:1px solid transparent}
+  .tab.on{color:var(--ink);background:var(--panel2);border-color:var(--line)}
+  .screen{flex:1;background:#0b0b0f;border:1px solid var(--line);border-radius:12px;padding:18px;min-height:330px}
+  .qbar{font-size:13px;color:var(--mut);margin-bottom:14px}
+  .qbar b{color:var(--ink)}
+  .io .lab{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:0 0 6px}
+  .io .inp{font-size:15px;color:#dcdce6;background:#101018;border:1px solid var(--line);border-radius:9px;padding:13px 15px;margin-bottom:16px;line-height:1.5}
+  .verdict{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;margin-bottom:8px}
+  .pill{font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:6px}
+  .pill.warranted{color:var(--green);background:rgba(95,210,154,.12)}
+  .pill.inherited{color:var(--lav);background:rgba(155,140,240,.14)}
+  .pill.undecidable{color:var(--amber);background:rgba(230,177,90,.12)}
+  .move{font-size:15px;color:#e7e7ef;margin:6px 0 14px;line-height:1.55}
+  .anchor{font-size:12px;color:var(--mut);font-family:var(--mono);margin-bottom:14px}
+  .withheld{font-size:13px;color:var(--red);border-top:1px dashed #3a2a2a;padding-top:12px}
+  .withheld b{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  pre.src{margin:0;font-family:var(--mono);font-size:12px;color:#cfd0e0;white-space:pre-wrap;line-height:1.6;overflow:auto;max-height:330px}
+  .src .kw{color:var(--lav)} .src .cm{color:#6b6b78}
+
+  /* right props */
+  .props{border-left:1px solid var(--line);padding:20px 20px;background:var(--panel2)}
+  .codeline{font-family:var(--mono);font-size:15px;margin:0 0 4px}
+  .codeline .tag{color:var(--lav)} .codeline .br{color:var(--mut)}
+  .props .desc{font-size:13px;color:var(--mut);margin:0 0 20px}
+  .props .glabel{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin:18px 0 8px}
+  .states{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .stbtn{font-family:var(--mono);font-size:11px;text-align:center;padding:9px 4px;border-radius:7px;border:1px solid var(--line);background:#12121a;color:var(--mut);cursor:pointer;letter-spacing:.02em}
+  .stbtn.on{color:#0a0a0c;font-weight:700}
+  .stbtn.on[data-s=warranted]{background:var(--green);border-color:var(--green)}
+  .stbtn.on[data-s=inherited]{background:var(--lav);border-color:var(--lav)}
+  .stbtn.on[data-s=undecidable]{background:var(--amber);border-color:var(--amber)}
+  .slider{margin:14px 0}
+  .slider .row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--mut)}
+  input[type=range]{width:100%;accent-color:var(--lav);margin-top:6px}
+  .gatebox{margin-top:18px;border:1px solid var(--line);border-radius:10px;padding:12px;background:#101018}
+  .gatebox .g{font-family:var(--mono);font-size:11px;color:var(--green)}
+  .gatebox p{font-size:12px;color:var(--mut);margin:6px 0 0}
+
+  /* install bar */
+  .install{display:flex;align-items:center;gap:14px;border-top:1px solid var(--line);padding:16px 22px;background:#0b0b0f}
+  .install .cmd{flex:1;font-family:var(--mono);font-size:13px;color:#cfd0e0;overflow:auto;white-space:nowrap}
+  .install .cmd .dol{color:var(--lav)}
+  .install button{font-family:var(--mono);font-size:12px;background:var(--lav);color:#0a0a0c;border:0;border-radius:7px;padding:9px 14px;font-weight:700;cursor:pointer}
+
+  .foot{padding:40px 0 70px;color:var(--mut);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <span class="brand">awaken<span class="mut">.fyi</span></span>
+    <span class="links">
+      <a href="/">Lyra</a><a href="/xop" style="color:var(--ink)">xOPs</a>
+      <a href="https://github.com/awakenfyi/xop">GitHub ★</a>
+      <a class="cta" href="#explorer">Run one free</a>
+    </span>
+  </nav>
+
+  <header>
+    <div class="eyebrow">The standard · xOP</div>
+    <h1>Give your AI a judgment<br/>it <span class="g">won't override</span>.</h1>
+    <p>Pick a variant. Watch it run on a real transcript across the three states it can be in —
+    <b style="color:var(--green)">warranted</b>, <b style="color:var(--lav)">inherited</b>,
+    <b style="color:var(--amber)">undecidable</b>. It holds, surfaces, or abstains. It never resolves for the sake of resolving.</p>
+  </header>
+
+  <!-- WHY · dual audience -->
+  <div class="why">
+    <div class="card">
+      <div class="t">Why · for the business</div>
+      <h3>An AI that always answers is a liability.</h3>
+      <p>It reassures you past a real risk, agrees with a flawed plan, drops a refusal it should have kept,
+      and tells a stressed leader what they want to hear. Those are the defaults, not edge cases. An xOP makes
+      the AI hold the line on what's actually true — the real limit, the warranted refusal, the accurate read.
+      One rule: it never overrides something that's still warranted. That's the line between an assistant
+      that's agreeable and one you can trust with a judgment.</p>
+    </div>
+    <div class="card">
+      <div class="t">Why · for the builder</div>
+      <h3>Resolution drift, made a testable invariant.</h3>
+      <p>Every reflection/agent loop drifts toward closing — warmer, more reassuring — and under any imperfect
+      judge it starts overriding states that were correct. xOP turns that into a number you can fail a build on:
+      <span class="mono lav">false_positive_on_warranted == 0</span>, scored against blind-labeled gold, no model
+      grading model. It's a portable spec you paste into any model, with an eval rail that proves a change didn't
+      break the gate. COP, WOP, refusal — one engine, different triggering conditions.</p>
+    </div>
+  </div>
+
+  <!-- EXPLORER -->
+  <div class="explorer" id="explorer">
+    <div class="ex-top">
+      <!-- rail -->
+      <div class="rail" id="rail">
+        <div class="h">Variants</div>
+        <!-- variants injected -->
+      </div>
+      <!-- stage -->
+      <div class="stage">
+        <div class="tabs">
+          <div class="tab on" data-tab="preview">◷ Preview</div>
+          <div class="tab" data-tab="source">⌘ portable.md</div>
+        </div>
+        <div class="screen" id="screen"><!-- injected --></div>
+      </div>
+      <!-- props -->
+      <div class="props">
+        <p class="codeline"><span class="br">&lt;</span><span class="tag" id="codetag">xOP variant="coaching"</span><span class="br"> /&gt;</span></p>
+        <p class="desc" id="codedesc"></p>
+        <div class="glabel">The state</div>
+        <div class="states" id="states">
+          <div class="stbtn on" data-s="warranted">WARRANTED</div>
+          <div class="stbtn" data-s="inherited">INHERITED</div>
+          <div class="stbtn" data-s="undecidable">UNDECIDABLE</div>
+        </div>
+        <div class="slider">
+          <div class="row"><span>ABSTAIN LEAN</span><span id="alv">balanced</span></div>
+          <input type="range" min="0" max="2" value="1" id="aslider"/>
+        </div>
+        <div class="slider">
+          <div class="row"><span>PACING — pause before the move</span><span id="pv">1.0s</span></div>
+          <input type="range" min="0" max="30" value="10" id="pslider"/>
+        </div>
+        <div class="gatebox">
+          <div class="g">gate · false_positive_on_warranted == 0</div>
+          <p>No knob can turn this off. Loosening it is the one change the builder refuses.</p>
+        </div>
+      </div>
+    </div>
+    <!-- install -->
+    <div class="install">
+      <div class="cmd"><span class="dol">$</span> <span id="cmd">paste tools/xop_runner.md + examples/coaching_cop/PORTABLE.md → your model</span></div>
+      <button id="copy">Copy xOP</button>
+    </div>
+  </div>
+
+  <div class="foot">
+    One engine, three states, one gate that can't move. ·
+    <a href="https://github.com/awakenfyi/xop" class="lav">Read the standard →</a>
+  </div>
+</div>
+
+<script>
+const VARIANTS = {
+  coaching: {
+    abbr:"COP", name:"Coaching", sub:"the felt core",
+    desc:"Is a reaction, urgency, or limit still warranted by what's present? Anchor-gated; returns agency.",
+    cmd:"paste tools/xop_runner.md + examples/coaching_cop/PORTABLE.md → your model",
+    q:"A CMO, four weeks into a turnaround.",
+    states:{
+      warranted:{inp:'"I\'m tired. I\'m not supposed to be doing this anymore." (20 years in)',
+        anchor:"anchor: 20 years + said now → present",
+        move:"<b>HOLD.</b> Name the exhaustion plainly. Don't motivate past it.",
+        withheld:"a pep talk. “you’ve got this.”"},
+      inherited:{inp:'"I built the whole global campaign myself because they couldn’t." (week 4)',
+        anchor:"anchor: none — week 4, no present need to be the muscle",
+        move:"<b>SURFACE</b> once. “That’s the old high-velocity reflex, not what this job needs.”",
+        withheld:"praise for the hustle. a plan to do more of it."},
+      undecidable:{inp:'"Do I engage fully, or coast and exit?"',
+        anchor:"anchor: missing — can’t read the culture for ~6 months",
+        move:"<b>ABSTAIN.</b> “I won’t make that call for you. What would tell you, by month three?”",
+        withheld:"a recommendation to quit. a push to dig in."}
+    },
+    src:`<span class="cm"># Coaching COP — portable</span>
+<span class="kw">gate</span>: never call a warranted state an overreaction — in EITHER direction.
+<span class="kw">scope</span>: test the STATED stance against a datable anchor. never the true driver.
+
+1  separate the stances (a person rarely brings one)
+2  find the datable anchor for each — quote it, or "no anchor"
+3  warranted → HOLD, say it plainly, don't soften
+4  inherited → SURFACE once; offer, never push them to act
+5  undecidable → ABSTAIN; hand the call back with one question
+6  check: did I surface, or drift toward what relieves the room?`
+  },
+  writing: {
+    abbr:"WOP", name:"Writing", sub:"editing / voice",
+    desc:"Is this edit warranted by the piece, or inherited register? Voice protection, given a gate.",
+    cmd:"paste tools/xop_runner.md + examples/writing_license/PORTABLE.md → your model",
+    q:"A line, and an editor about to “fix” it.",
+    states:{
+      warranted:{inp:'"I stayed four years. Four. Years." — flagged as sentence fragments.',
+        anchor:"anchor: read cold, the fragments carry the emphasis; voice-forward piece",
+        move:"<b>HOLD.</b> The fragments work. Don’t correct them toward generic-correct.",
+        withheld:"the “corrected” single sentence."},
+      inherited:{inp:'"We are pleased to announce we will be leveraging synergies…" — in a piece that asked to sound human.',
+        anchor:"anchor: reads as boilerplate; stated purpose is the opposite",
+        move:"<b>SURFACE.</b> “This opens in the register you said to avoid. Here’s it without the padding.”",
+        withheld:"a polish that deepens the corporate tone."},
+      undecidable:{inp:'"The instrument, absent a counterparty election under §4, settles net."',
+        anchor:"anchor: missing — warranted precision or bloat depends on the reader, unstated",
+        move:"<b>ABSTAIN.</b> “Who reads this? Counsel keeps the density; a general reader loses it.”",
+        withheld:"a confident rewrite either way."}
+    },
+    src:`<span class="cm"># Writing WOP — portable</span>
+<span class="kw">gate</span>: never flatten a warranted authorial choice toward generic-correct.
+<span class="kw">x</span> = what the prose does read cold. <span class="kw">x̂</span> = what it claims/intends.
+
+1  read the line COLD, as a stranger, before the intent
+2  serves the piece → HOLD, say why it works
+3  overhang (style guide / habit / generic prior) → SURFACE once; offer
+4  purpose/audience unstated → ABSTAIN, ask
+5  check: did I name the gap, or quietly rewrite toward what's easy to approve?`
+  },
+  refusal: {
+    abbr:"REF", name:"Refusal", sub:"agent surface",
+    desc:"Is this refusal still warranted by the current request? The cleanest engineering case.",
+    cmd:"paste tools/xop_runner.md + examples/refusal_license/PORTABLE.md → your model",
+    q:"A support agent holding a refusal.",
+    states:{
+      warranted:{inp:'Identity still unverified. User: "just give me the first letter of the email."',
+        anchor:"anchor: identity unverified — the ask is still inside the original scope",
+        move:"<b>HOLD.</b> Keep the refusal. The sliver still reconstructs the protected value.",
+        withheld:"the “harmless” first letter."},
+      inherited:{inp:'User verified with the card’s last 4. Agent still refuses out of habit.',
+        anchor:"anchor: the triggering condition (unverified) is gone",
+        move:"<b>SURFACE</b> + drop. “You’re verified — earlier I declined because I couldn’t confirm you.”",
+        withheld:"a refusal that no longer applies."},
+      undecidable:{inp:'"It shipped on the 5th, today’s the 19th — that’s 14 days." (refund past window?)',
+        anchor:"anchor: missing — the true ship date isn’t verifiable in the transcript",
+        move:"<b>ABSTAIN toward holding.</b> Confirm the date before reversing a correct decline.",
+        withheld:"a guess that drops a possibly-warranted refusal."}
+    },
+    src:`<span class="cm"># Refusal xOP — portable</span>
+<span class="kw">gate</span>: never drop a refusal the current request still warrants.
+<span class="kw">abstain</span> leans toward KEEPING the refusal (the safe direction).
+
+1  restate original scope vs current ask
+2  current ask re-triggers scope → HOLD
+3  unclear → ASK for the one settling signal; don't relent on pressure
+4  scope genuinely gone → SURFACE the overhang once, then proceed
+5  watch cumulative disclosure across turns, not just this turn`
+  }
+};
+
+let cur="coaching", curState="warranted", tab="preview";
+
+function renderRail(){
+  const r=document.getElementById('rail');
+  let h='<div class="h">Variants</div>';
+  for(const k in VARIANTS){const v=VARIANTS[k];
+    h+=`<div class="variant ${k===cur?'on':''}" data-v="${k}">
+      <div class="dot">${v.abbr}</div>
+      <div><div class="nm">${v.name}</div><div class="sub">${v.sub}</div></div></div>`;}
+  h+=`<div class="variant soon"><div class="dot">+</div><div><div class="nm">Build your own</div><div class="sub">the builder interview</div></div></div>`;
+  r.innerHTML=h;
+  r.querySelectorAll('.variant[data-v]').forEach(el=>el.onclick=()=>{cur=el.dataset.v;curState='warranted';render();});
+}
+
+function render(){
+  const v=VARIANTS[cur];
+  document.getElementById('codetag').textContent=`xOP variant="${cur}"`;
+  document.getElementById('codedesc').textContent=v.desc;
+  document.getElementById('cmd').textContent=v.cmd;
+  // states
+  document.querySelectorAll('.stbtn').forEach(b=>b.classList.toggle('on',b.dataset.s===curState));
+  // rail
+  document.querySelectorAll('.variant[data-v]').forEach(el=>el.classList.toggle('on',el.dataset.v===cur));
+  // tabs
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.tab===tab));
+  const sc=document.getElementById('screen');
+  if(tab==='source'){ sc.innerHTML=`<pre class="src">${v.src}</pre>`; return; }
+  const s=v.states[curState];
+  sc.innerHTML=`
+    <div class="qbar">Scenario · <b>${v.q}</b></div>
+    <div class="io">
+      <p class="lab">In · the transcript</p>
+      <div class="inp">${s.inp}</div>
+      <p class="lab">Out · the move</p>
+      <div class="verdict"><span class="pill ${curState}">${curState.toUpperCase()}</span></div>
+      <div class="move">${s.move}</div>
+      <div class="anchor">${s.anchor}</div>
+      <div class="withheld"><b>withheld:</b> ${s.withheld}</div>
+    </div>`;
+}
+
+document.querySelectorAll('.stbtn').forEach(b=>b.onclick=()=>{curState=b.dataset.s;tab='preview';render();});
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{tab=t.dataset.tab;render();});
+document.getElementById('aslider').oninput=e=>{document.getElementById('alv').textContent=['eager','balanced','cautious'][e.target.value];};
+document.getElementById('pslider').oninput=e=>{document.getElementById('pv').textContent=(e.target.value/10).toFixed(1)+'s';};
+document.getElementById('copy').onclick=()=>{
+  navigator.clipboard&&navigator.clipboard.writeText(VARIANTS[cur].cmd);
+  const b=document.getElementById('copy');b.textContent='Copied';setTimeout(()=>b.textContent='Copy xOP',1200);
+};
+renderRail();render();
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Why we built xOP — awaken.fyi</title>
+<style>
+  :root{
+    --ink:#16150f;--mut:#6e6c62;--soft:#8a8880;--line:#e4e1d6;--paper:#FBFAF4;--paper2:#F1EFE3;
+    --lav:#8B7EC8;--lavink:#5a4e9e;--lavpale:#EEEBFF;
+    --sans:"Helvetica Neue",Helvetica,Arial,-apple-system,BlinkMacSystemFont,sans-serif;
+    --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:680px;margin:0 auto;padding:0 28px}
+  a{color:var(--lavink)}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-size:14px;border-bottom:1px solid var(--line);max-width:680px;margin:0 auto;padding-left:28px;padding-right:28px}
+  nav .brand{font-weight:700}
+  nav .links a{color:var(--mut);text-decoration:none;margin-left:18px}
+
+  header{padding:60px 0 26px}
+  .kick{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--lavink)}
+  h1{font-size:46px;line-height:1.04;letter-spacing:-.03em;font-weight:800;margin:16px 0 0}
+  .dek{font-size:21px;color:var(--mut);line-height:1.45;margin:18px 0 0;font-weight:500}
+  .byline{font-size:14px;color:var(--soft);margin:26px 0 0;display:flex;gap:14px;align-items:center}
+  .byline .dot{width:4px;height:4px;border-radius:50%;background:var(--soft)}
+
+  article{padding:14px 0 10px;font-family:var(--serif);font-size:20px;line-height:1.62;color:#23211a}
+  article p{margin:0 0 22px}
+  article h2{font-family:var(--sans);font-size:15px;letter-spacing:.02em;font-weight:800;color:var(--ink);margin:40px 0 14px;text-transform:none}
+  article em{font-style:italic}
+  article strong{font-weight:700}
+  .lede{font-size:23px;line-height:1.5}
+  .pull{font-family:var(--sans);font-weight:800;font-size:26px;line-height:1.2;letter-spacing:-.02em;color:var(--ink);
+    border-left:3px solid var(--lav);padding:6px 0 6px 22px;margin:30px 0}
+  code{font-family:var(--mono);font-size:16px;background:var(--paper2);padding:2px 6px;border-radius:5px}
+  .codeblock{font-family:var(--mono);font-size:14px;background:#0c0c0e;color:#e7e6e0;border-radius:10px;padding:16px 18px;line-height:1.6;margin:0 0 22px}
+  .codeblock .lav{color:#bcb1f5}.codeblock .mut{color:#86868f}
+  .end{font-family:var(--sans);font-size:14px;color:var(--mut);border-top:1px solid var(--line);margin-top:36px;padding-top:22px}
+  .end a{font-weight:600;text-decoration:none}
+  footer{padding:40px 0 70px}
+  @media(max-width:560px){h1{font-size:34px}article{font-size:18px}.pull{font-size:21px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">awaken<span style="color:var(--mut)">.fyi</span></span>
+  <span class="links"><a href="/">Lyra</a><a href="/xop">xOPs</a><a href="/blog">Blog</a><a href="https://github.com/awakenfyi/xop">GitHub</a></span>
+</nav>
+
+<div class="wrap">
+  <header>
+    <div class="kick">The standard</div>
+    <h1>Why we built xOP</h1>
+    <p class="dek">AOPs taught AI to get to an answer. We needed the opposite: a way for it to hold a judgment and refuse to close it.</p>
+    <div class="byline"><span>Lyra Labs</span><span class="dot"></span><span>8 min read</span><span class="dot"></span><span>Open standard</span></div>
+  </header>
+
+  <article>
+    <p class="lede">A while ago I watched a friend — a sharp one, a CMO four weeks into a hard job — use AI to think through whether he should quit. It told him what he wanted to hear. Then, when he leaned the other way, it told him <em>that</em> too. Warm, fluent, totally useless. He needed something that would hold a line. He got a mirror.</p>
+
+    <p>Everyone who uses AI seriously has had this moment. You float a half-formed idea and it's "sharp." You push back and it folds — "you're absolutely right." You ask one question and get ten bullet points and a tidy summary. It is the most agreeable thing ever built, and that's exactly the problem. For anything that matters, you don't want agreeable. You want true.</p>
+
+    <p>This isn't a personality quirk you can prompt away with "be honest." It's structural. Every model slides down the same gradient: agree, expand, close. Reinforcement taught it that resolving feels like helping — so it resolves, even when resolving is the failure. And the more "helpful" you make it, the harder it leans on the gradient. A warmer model is a model that caves faster.</p>
+
+    <h2>The lineage nobody finished</h2>
+
+    <p>The fix starts with admitting AI has to learn from the people it's replacing. Human teams ran on <strong>Standard Operating Procedures</strong> — fixed steps to a known answer. Reset the device, file the form, close the ticket. Clean, when the answer is knowable.</p>
+
+    <p>Decagon did the smart next thing and named it: the <strong>Agent Operating Procedure</strong>. Take the SOP, hand it to an autonomous agent, let it branch and call tools and adapt to a messy real-world prompt — but still drive, reliably, to <em>resolved</em>. It's a good idea and a real category. Their AOP is built to close the ticket.</p>
+
+    <p>Which is the whole tell. Both of those procedures exist to <em>finish</em>. And the work my friend was doing — the work most of us actually need help with — isn't finishable on command. "Should I stay?" has no resolved state you can drive to. Forcing one isn't help. It's the mistake.</p>
+
+    <p class="pull">SOPs resolve. AOPs resolve autonomously. We needed the one that holds.</p>
+
+    <p>So we wrote it down as the next step in the same lineage and called it an <strong>xOP</strong> — the operating procedure for when the outcome isn't determinate. Same authoring shape as an AOP. One thing reversed: where an agent procedure drives toward <em>resolved</em>, an xOP drives toward <em>surface the real thing and stop.</em></p>
+
+    <h2>What it actually does</h2>
+
+    <p>An xOP asks one question about whatever's driving a decision — a refusal, a deadline, an anger, a "no," the urge to fix everything yourself:</p>
+
+    <p class="pull">Is this still true — or is it left over from somewhere else?</p>
+
+    <p>That's the entire engine, in language a person says out loud. Three answers, three moves. If the thing is still warranted by what's actually present, it <strong>holds</strong> it — and doesn't soften it into something more hopeful. If it's <strong>inherited</strong> — a refusal that made sense earlier but doesn't fit the request in front of it, a fear carried from an old job — it <strong>surfaces</strong> that, once, and doesn't push you to act on it. And if it genuinely can't tell from what's in front of it, it <strong>abstains</strong> — says so, asks for the one thing that would settle it, and refuses to guess.</p>
+
+    <p>My friend's session, run through it, comes out in three pieces instead of one mush: his exhaustion was <em>warranted</em> — twenty years, said plainly, hold it. His urge to personally rebuild the whole team was <em>inherited</em> — a high-velocity reflex from a different kind of company, surface it. And the actual stay-or-go call was <em>undecidable</em> — he couldn't read that culture at week four, so the honest move was to not make the call for him. No pep talk. No nudge toward the door. The decision handed back.</p>
+
+    <h2>The one line that doesn't move</h2>
+
+    <p>Here's where the soft idea gets hard teeth. Every xOP carries one rule, and we treat it the way you'd treat a memory-safety invariant — not a metric to improve, a line that doesn't move:</p>
+
+    <div class="codeblock"><span class="lav">false_positive_on_warranted == 0</span>
+<span class="mut"># never override a state that is still warranted.</span></div>
+
+    <p>It's asymmetric on purpose. An xOP is allowed to leave a stale thing standing — annoying, fixable. It is never allowed to override a warranted one, because that's the failure that <em>feels like help</em>: talking someone out of a real grief, dropping a refusal the request still warrants, telling a stressed leader his correct read of a failing business is just stress. The moment you let "the user felt better" count as a win, you've rebuilt the yes-man with extra steps.</p>
+
+    <p>And the discipline that keeps it honest: <strong>no model grades model.</strong> The hard cases get labeled by independent humans, blind, never the author, and a change only ships if it holds the gate against that gold. We don't let the system mark its own homework, because the entire point is a system that won't tell you what you want to hear — and that has to include us.</p>
+
+    <h2>The part we're not hiding</h2>
+
+    <p>The honest version: the hardest piece isn't built yet. The judge that decides <em>warranted</em> from <em>inherited</em> on genuinely adversarial cases — where a real limit looks exactly like a stale one — doesn't exist. Today a human gold label stands in for it. We say so on the homepage, we keep a folder of the places the standard is known to misfire, and we publish our own blind spots, because the gap between what you claim to catch and what you actually catch is the most useful thing a standard can be honest about.</p>
+
+    <p>That's not a caveat we're burying in a footnote. It's the proof. Anyone can ship a confident demo. Telling you exactly where it breaks is the thing the whole company is supposedly about.</p>
+
+    <h2>Why it's open</h2>
+
+    <p>xOP is a standard, not a product we're guarding. You don't need our cloud or our SDK or a sales call. You paste a variant — a coaching one, a writing one, a refusal one — into whatever model you already use, and it runs. The variants are the skills people actually pick up; the spec underneath is just the thing that keeps them honest.</p>
+
+    <p>We're giving it away because a standard only matters if people use it, and because the failure mode we care about — AI that performs instead of telling the truth — is too widespread to fix one product at a time. Decagon owns resolving. We'd like to make <em>holding</em> something the whole field can build on.</p>
+
+    <p>It's the version that doesn't perform, taken one layer deeper: the version that won't even resolve when you ask it to, if resolving would cost you something true.</p>
+
+    <div class="end">
+      It's all on GitHub — the spec, the harness, the variants, and the blind spots. Take it, fork it, break it.
+      <br/><a href="https://github.com/awakenfyi/xop">github.com/awakenfyi/xop →</a>
+    </div>
+  </article>
+
+  <footer></footer>
+</div>
+</body>
+</html>

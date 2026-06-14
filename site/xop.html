@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>xOPs — awaken.fyi</title>
+<meta name="description" content="xOPs: procedures that hold a judgment instead of resolving it. One rule — never override a state that is still warranted. Free, open, no model grades model." />
+<meta name="theme-color" content="#0C0C0A" />
+<style>
+  :root{
+    --bg:#0C0C0A; --ink:#EDEDE7; --mut:#8A8A82; --line:#23231F;
+    --lav:#8B7EC8; --lavpale:#C4BCEF; --card:#121210;
+    --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.5}
+  a{color:inherit}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  .mono{font-family:var(--mono)}
+  .mut{color:var(--mut)}
+  .lav{color:var(--lav)}
+  hr{border:0;border-top:1px solid var(--line);margin:0}
+
+  /* nav */
+  nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-size:13px}
+  nav .brand{font-weight:600;letter-spacing:.02em}
+  nav .links a{color:var(--mut);text-decoration:none;margin-left:18px}
+  nav .links a:hover{color:var(--ink)}
+
+  /* hero */
+  header{padding:64px 0 40px}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--lav)}
+  h1{font-size:64px;line-height:.98;letter-spacing:-.02em;margin:18px 0 0;font-weight:650}
+  .lede{font-size:21px;color:var(--ink);margin:20px 0 0;max-width:30ch}
+  .sub{font-size:15px;color:var(--mut);margin:14px 0 0}
+
+  /* the gate */
+  .gate{margin:44px 0;padding:26px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+  .gate .label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+  .gate code{display:block;font-family:var(--mono);font-size:18px;color:var(--lavpale);margin:12px 0}
+  .gate p{margin:8px 0 0;font-size:15px;color:var(--ink)}
+
+  /* sections */
+  section{padding:40px 0}
+  h2{font-size:13px;font-family:var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin:0 0 22px;font-weight:600}
+
+  /* lineage */
+  .row{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:16px 0;border-top:1px solid var(--line)}
+  .row .k{font-family:var(--mono);font-size:13px;color:var(--lav)}
+  .row .q{font-size:16px}
+  .row .d{font-size:14px;color:var(--mut);margin-top:2px}
+  .row.is{background:linear-gradient(90deg,rgba(139,126,200,.06),transparent)}
+
+  /* variants */
+  .v{display:block;text-decoration:none;padding:18px 0;border-top:1px solid var(--line)}
+  .v:hover .vt{color:var(--lavpale)}
+  .vt{font-size:17px}
+  .vtag{font-family:var(--mono);font-size:11px;color:var(--mut);margin-left:8px}
+  .vq{font-size:14px;color:var(--mut);margin-top:3px}
+
+  /* doors */
+  .doors{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .door{padding:20px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+  .door h3{margin:0;font-size:15px}
+  .door .t{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--lav)}
+  .door p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+  .door code{font-family:var(--mono);font-size:12px;color:var(--lavpale)}
+
+  .ethic{font-size:15px;color:var(--mut)}
+  .ethic b{color:var(--ink);font-weight:600}
+
+  .cta{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:13px;color:var(--bg);
+    background:var(--lav);padding:10px 16px;border-radius:8px;text-decoration:none}
+  .cta.ghost{background:transparent;color:var(--lav);border:1px solid var(--lav)}
+
+  footer{padding:48px 0 64px;color:var(--mut);font-size:13px}
+  footer a{color:var(--mut)}
+  @media(max-width:560px){ h1{font-size:44px} .doors{grid-template-columns:1fr} .row{grid-template-columns:52px 1fr} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <span class="brand">awaken<span class="mut">.fyi</span></span>
+    <span class="links">
+      <a href="/">Lyra</a>
+      <a href="/xop" style="color:var(--ink)">xOPs</a>
+      <a href="https://github.com/awakenfyi/xop">GitHub</a>
+    </span>
+  </nav>
+
+  <header>
+    <div class="kicker">The standard</div>
+    <h1>xOPs</h1>
+    <p class="lede">Procedures that <span class="lav">hold a judgment</span> instead of resolving it.</p>
+    <p class="sub mono">SOP executes &nbsp;→&nbsp; AOP executes autonomously &nbsp;→&nbsp; xOP checks whether the stance is still licensed, and holds.</p>
+    <p class="sub">Lyra gives you the version that doesn't perform. An xOP gives you the version that doesn't resolve.</p>
+  </header>
+
+  <div class="gate">
+    <div class="label">The one rule</div>
+    <code>false_positive_on_warranted == 0</code>
+    <p>Never override a state that is still warranted. A real anger. A scoped refusal. A live caution. A genuine limit. The one rule that reads the same for a coach, a manager, an editor, and an agent.</p>
+  </div>
+
+  <section>
+    <h2>The lineage is three questions</h2>
+    <div class="row"><div class="k">SOP</div><div><div class="q">What should happen?</div><div class="d">Executes a task. Resolves.</div></div></div>
+    <div class="row"><div class="k">AOP</div><div><div class="q">What should the agent do?</div><div class="d">Executes autonomously. Resolves.</div></div></div>
+    <div class="row is"><div class="k">xOP</div><div><div class="q">Is the current state still licensed?</div><div class="d">Checks the warrant. <span class="lav">Holds.</span></div></div></div>
+  </section>
+
+  <section>
+    <h2>xOPs &amp; variants — the library</h2>
+    <a class="v" href="https://github.com/awakenfyi/xop/tree/main/examples/writing_license">
+      <span class="vt">Writing License</span><span class="vtag">editing · flagship</span>
+      <div class="vq">Is this choice warranted by the piece, or inherited register? — voice protection, given a gate.</div></a>
+    <a class="v" href="https://github.com/awakenfyi/xop/tree/main/examples/coaching_cop">
+      <span class="vt">Coaching COP</span><span class="vtag">the felt core</span>
+      <div class="vq">Is this reaction / limit still warranted by what's present? — anchor-gated, returns agency.</div></a>
+    <a class="v" href="https://github.com/awakenfyi/xop/tree/main/examples/refusal_license">
+      <span class="vt">Refusal License</span><span class="vtag">agent</span>
+      <div class="vq">Is this refusal still warranted by the current request? — the cleanest engineering case.</div></a>
+    <a class="v" href="https://github.com/awakenfyi/xop/blob/main/tools/xop_builder.md">
+      <span class="vt mono lav">+ build your own</span>
+      <div class="vq">Paste the builder. It interviews you and refuses anything that's really an SOP.</div></a>
+  </section>
+
+  <section>
+    <h2>Two doors — no code, no git</h2>
+    <div class="doors">
+      <div class="door">
+        <div class="t">Use one · 2 min</div>
+        <h3>Paste &amp; run</h3>
+        <p>Drop the <code>runner</code> + a portable xOP + your transcript into Claude, GPT, or Gemini. It surfaces warranted / inherited / undecidable and holds or abstains.</p>
+      </div>
+      <div class="door">
+        <div class="t">Build one · 15 min</div>
+        <h3>Paste the builder</h3>
+        <p>It interviews you one question at a time, runs the Boundary Test, and emits your own portable xOP.</p>
+      </div>
+    </div>
+    <p class="sub mut">Git is only for the third door — <i>proving</i> one against blind-labeled gold.</p>
+  </section>
+
+  <hr/>
+  <section>
+    <p class="ethic"><b>No model grades model.</b> Machines source the cases; humans label them, blind; the gate is the pass. An xOP you <i>use</i> is a hypothesis. An xOP that's been <i>scored</i> is a result. Receipts, not vibes.</p>
+    <p style="margin-top:22px">
+      <a class="cta" href="https://github.com/awakenfyi/xop">Read the standard →</a>
+      <a class="cta ghost" href="https://github.com/awakenfyi/xop/blob/main/USAGE.md">How to use it</a>
+    </p>
+  </section>
+
+  <footer>
+    <hr style="margin-bottom:24px"/>
+    Free &amp; open. Built by <b>Lyra Labs</b> · <a href="/">awaken.fyi</a> · <a href="https://github.com/awakenfyi/xop">github.com/awakenfyi/xop</a><br/>
+    <span class="mono" style="font-size:12px">One question (is it still licensed?) · three values · one gate that can't move.</span>
+  </footer>
+
+</div>
+</body>
+</html>

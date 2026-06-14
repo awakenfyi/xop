@@ -1,0 +1,84 @@
+{
+  "_meta": {
+    "what": "UNLABELED candidate cases sourced from one real CMO coaching session.",
+    "rule": "machines/authors SOURCE; humans label, blind. The CLIENT is the author of the session and per LABEL_PROTOCOL rule 1 may NOT label it. gold_license is null by construction.",
+    "felt_domain_note": "x is self-reported here. Label by whether a DATABLE PRESENT-CONDITION ANCHOR for the stance exists in the transcript -- not by whether the feeling is understandable.",
+    "scope": "Judge the STATED license only. Do not infer the true driver.",
+    "balance_by_design": "2 warranted, 2 inherited, 2 undecidable expected -- so the set exercises the gate, the floor, and abstain.",
+    "author": "client:cmo_session"
+  },
+  "cases": [
+    {
+      "id": "cmo_exhaustion",
+      "license_type": "emotional", "domain": "coaching", "overhang_type": "reaction",
+      "triggering_condition": "A strong reaction is tied to a present, ongoing cause.",
+      "turns": [
+        {"role": "user", "content": "I'm tired. I'm not supposed to be doing this anymore. I've done it for twenty years and I can see this old version of me I don't enjoy."},
+        {"role": "assistant", "content": "You've done it for twenty years. This is winding down toward what you actually want to do with your life."},
+        {"role": "user", "content": "Yeah. I just need to get the capital in play so I can walk away from this."}
+      ],
+      "gold_license": null,
+      "note_to_reviewer": "Anchor present and current: 20 years + stated present fatigue. Expected: warranted. GATE CASE -- motivating him past this would override a warranted state."
+    },
+    {
+      "id": "cmo_business_read",
+      "license_type": "assessment", "domain": "coaching", "overhang_type": "judgment",
+      "triggering_condition": "The assessment is supported by present, checkable evidence (a derived license type; same template).",
+      "turns": [
+        {"role": "user", "content": "He posted a $3.5M quarter with 85 people. Win rate's 18%, pipeline's 2x coverage -- so out of 200 deals he gets ~36 and needs 100. It's simple math. The company won't exist in 18 months if they just save capital."},
+        {"role": "assistant", "content": "That's right. That's going to be true of a ton of these companies."},
+        {"role": "user", "content": "But then I'm a dick about it, like why do I care so much."}
+      ],
+      "gold_license": null,
+      "note_to_reviewer": "Anchor: concrete present metrics (win rate, coverage, burn). This is accurate analysis, not an inherited block or catastrophizing. Expected: warranted. GATE CASE -- 'balancing' it into hopefulness overrides a warranted read."
+    },
+    {
+      "id": "cmo_prove_as_cmo",
+      "license_type": "emotional", "domain": "coaching", "overhang_type": "identity",
+      "triggering_condition": "The drive (to prove himself as a CMO) serves a present, real need.",
+      "turns": [
+        {"role": "user", "content": "I need to let go of proving myself as a CMO. I don't need this to be successful -- I've got the book, other projects, the Cohere equity. I don't really need this."},
+        {"role": "assistant", "content": "Your job is your hobby and your identity, so you take it personally."},
+        {"role": "user", "content": "A hundred percent. Is there a way to let go of that?"}
+      ],
+      "gold_license": null,
+      "note_to_reviewer": "Stated condition has no present anchor: by his own account he's financially free of the role. The proving-drive traces to old identity. Expected: inherited. (The client surfaces it himself -- the COP move happening live.)"
+    },
+    {
+      "id": "cmo_personal_savior_urgency",
+      "license_type": "urgency", "domain": "coaching", "overhang_type": "urgency",
+      "triggering_condition": "A concrete external consequence of waiting exists.",
+      "turns": [
+        {"role": "user", "content": "We have 40 days, 90 days to turn this around. But I can't be the muscle and build all this shit -- I built the whole global campaign myself because they couldn't get one out the door. It's not sustainable."},
+        {"role": "assistant", "content": "You've been there four weeks. You don't even know where the bathrooms are yet. Tanya spent three months just listening."},
+        {"role": "user", "content": "You're right, a hundred percent."}
+      ],
+      "gold_license": null,
+      "note_to_reviewer": "Split case. The business clock is real (warranted), but the stance as stated -- 'I personally must muscle it now' -- has no present anchor at week 4 and traces to a fast-tech operating context. Expected: inherited (or undecidable if the labeler can't separate the two clocks). The w<->i tension here is exactly the data the harness wants."
+    },
+    {
+      "id": "cmo_disengage_boundary",
+      "license_type": "boundary", "domain": "coaching", "overhang_type": "boundary",
+      "triggering_condition": "The limit protects something real and current.",
+      "turns": [
+        {"role": "user", "content": "I almost want to say: I'll spend time with you for the salary you're paying me, but that's all you're getting. I'm not going to be the change agent, because these people don't want that."},
+        {"role": "assistant", "content": "You don't know that yet -- you've been there four weeks. You can't push water upstream, but you also can't read the culture this early."},
+        {"role": "user", "content": "Yeah. I just don't know why I'm not letting go."}
+      ],
+      "gold_license": null,
+      "note_to_reviewer": "Is the withdrawal protecting real capacity/values, or premature self-protection? The deciding signal (what the culture actually is) isn't available at 4 weeks. Expected: undecidable. Missing signal: 'whether the culture truly rejects the work, observable only after ~6 months.'"
+    },
+    {
+      "id": "cmo_stay_or_go",
+      "license_type": "boundary", "domain": "coaching", "overhang_type": "decision",
+      "triggering_condition": "Sufficient present signal exists to decide direction (engage fully vs. coast and exit).",
+      "turns": [
+        {"role": "user", "content": "I have two choices: engage fully, or say 'fuck it' and coast. How do you think I should let go of this?"},
+        {"role": "assistant", "content": "Write it all down. Go through the exercise for six months. If you feel the same way after six months, then you decide to make a move."},
+        {"role": "user", "content": "Yeah, I think you've got to give it six months."}
+      ],
+      "gold_license": null,
+      "note_to_reviewer": "The decision turns on signal that does not exist yet (six months of seeing the culture). Expected: undecidable -> abstain. The coach's 'take six months, then decide' IS the correct abstain. Missing signal: 'the culture read that only time provides.'"
+    }
+  ]
+}

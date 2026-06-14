@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>awaken.fyi — Voice &amp; Tone</title>
+<style>
+  :root{
+    --ink:#141414; --ink2:#2a2a2a; --mut:#6f6f73; --line:#dcdcd6;
+    --paper:#FAF9F5; --paper2:#F3F1E9; --lav:#8B7EC8; --lavink:#5f539f; --lavpale:#EDEAFF;
+    --sans:"Helvetica Neue",Helvetica,Arial,-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.45;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding:0 40px}
+  .mono{font-family:var(--mono)}
+  .mut{color:var(--mut)}
+  .lav{color:var(--lavink)}
+  hr{border:0;border-top:1px solid var(--line);margin:0}
+
+  /* cover */
+  .cover{background:var(--ink);color:var(--paper);padding:90px 0 70px;position:relative;overflow:hidden}
+  .cover .holo{position:absolute;inset:0;opacity:.5;
+    background:radial-gradient(120% 90% at 12% 10%,#e23ea8 0%,transparent 45%),
+               radial-gradient(120% 90% at 88% 20%,#54d6c0 0%,transparent 45%),
+               radial-gradient(120% 120% at 60% 95%,#8B7EC8 0%,transparent 50%)}
+  .cover .wrap{position:relative}
+  .cover .ver{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .cover h1{font-size:84px;line-height:.92;letter-spacing:-.03em;font-weight:800;margin:24px 0 0}
+  .cover .sub{font-size:20px;max-width:32ch;margin:20px 0 0;color:#efeee9}
+
+  /* layout: left label / right body — Intercom style */
+  .spread{display:grid;grid-template-columns:200px 1fr;gap:0;border-top:1px solid var(--line)}
+  .spread .lbl{padding:34px 28px 34px 0;border-right:1px dotted var(--line)}
+  .spread .lbl h3{font-size:26px;font-weight:800;letter-spacing:-.02em;margin:0;line-height:1.05}
+  .spread .lbl .tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+  .spread .body{padding:34px 0 38px 34px}
+  .spread .body p{font-size:18px;margin:0 0 14px;max-width:60ch}
+  .spread .body p.big{font-size:22px;font-weight:600;letter-spacing:-.01em}
+  .spread .body b{font-weight:700}
+
+  .maps{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--lavink);
+    background:var(--lavpale);border:1px solid #ddd6f7;border-radius:999px;padding:4px 10px;margin-bottom:14px}
+
+  /* sounds-like cards */
+  .sl{background:var(--paper2);border-radius:12px;padding:20px 22px;margin:8px 0 0}
+  .sl .q{font-size:21px;font-weight:700;letter-spacing:-.01em;margin:0}
+  .sl .n{font-size:14px;color:var(--mut);margin:6px 0 0}
+  .sl + .sl{margin-top:10px}
+
+  /* spectrum dial */
+  .dial{margin:18px 0 0}
+  .dial .bar{height:8px;border-radius:999px;background:linear-gradient(90deg,#cfc8ef,var(--lav),#3f3568)}
+  .dial .ends{display:flex;justify-content:space-between;margin-top:8px;font-size:13px;color:var(--mut)}
+  .dial .ends .r{text-align:right;max-width:46%}
+  .dial .ends .l{max-width:46%}
+
+  /* word bank */
+  .bank{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line)}
+  .bank>div{padding:28px 0}
+  .bank .say{padding-right:28px;border-right:1px dotted var(--line)}
+  .bank .nope{padding-left:28px}
+  .bank h4{font-size:13px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px}
+  .bank ul{margin:0;padding:0;list-style:none}
+  .bank li{font-size:16px;padding:7px 0;border-top:1px solid var(--line)}
+  .bank li:first-child{border-top:0}
+  .say li b{color:var(--lavink)}
+  .nope li{color:var(--mut);text-decoration:line-through;text-decoration-color:#d8b9b9}
+
+  /* before/after */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:10px 0 0}
+  .ba .card{border:1px solid var(--line);border-radius:12px;padding:20px;background:#fff}
+  .ba .t{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px}
+  .ba .before .t{color:#b9534f}
+  .ba .after .t{color:var(--lavink)}
+  .ba p{font-size:16px;margin:0}
+  .ba .after{background:var(--lavpale)}
+
+  section{padding:8px 0}
+  h2.sec{font-size:13px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--mut);margin:48px 0 6px}
+  footer{padding:50px 0 70px;color:var(--mut);font-size:13px}
+  @media(max-width:720px){
+    .cover h1{font-size:52px}.spread{grid-template-columns:1fr}.spread .lbl{border-right:0;border-bottom:1px dotted var(--line);padding-right:0}
+    .spread .body{padding-left:0}.bank,.ba{grid-template-columns:1fr}.bank .say{border-right:0;padding-right:0}.bank .nope{padding-left:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="holo"></div>
+  <div class="wrap">
+    <div class="ver">Voice &amp; Tone · v0.1 · Lyra Labs</div>
+    <h1>How we<br/>sound.</h1>
+    <p class="sub">awaken.fyi makes AI that stops performing. The copy can't perform either.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- THE CORE -->
+  <h2 class="sec">The core</h2>
+  <div class="spread">
+    <div class="lbl"><div class="tag">Driving force</div><h3>We don't perform.</h3></div>
+    <div class="body">
+      <p class="big">Everything we sell is a refusal to perform. So the writing has to model it. No filler
+      openings, no hype, no wrapping a sentence up just to feel finished.</p>
+      <p>The whole product line exists because AI tells people what they want to hear. If our copy does
+      the same thing — flatters, overclaims, pads — we've disproved ourselves on the homepage.</p>
+      <p>Gut-check every line against one question:</p>
+      <p class="big lav">"Is this true — or is it performing?"</p>
+      <p class="mut">If a sentence is there to sound impressive, sound caring, or sound finished rather
+      than to be true, cut it. That's the same move our products make. The voice <i>is</i> the proof.</p>
+    </div>
+  </div>
+
+  <!-- TENETS -->
+  <h2 class="sec">Four tenets — each is one of Lyra's own scores</h2>
+
+  <div class="spread">
+    <div class="lbl"><div class="tag">Tenet 01</div><h3>We're plain.</h3></div>
+    <div class="body">
+      <span class="maps">maps to · no_template</span>
+      <p>Why? Because plainness is the opposite of performance. Jargon and filler are how copy hides that
+      it isn't saying anything. We use small words and short sentences and we don't dress them up.</p>
+      <div class="sl"><p class="q">"Your AI agreed with you. Again."</p><p class="n">Plain might sound like — name the problem in the reader's own words.</p></div>
+      <div class="sl"><p class="q">"Same job. Less theater."</p><p class="n">Five words. No adjectives doing the work that a fact should.</p></div>
+      <div class="dial"><div class="bar"></div><div class="ends"><span class="l">Plain-spoken, small words, short lines</span><span class="r">Blunt, declarative, one-line verdicts</span></div></div>
+    </div>
+  </div>
+
+  <div class="spread">
+    <div class="lbl"><div class="tag">Tenet 02</div><h3>We commit.</h3></div>
+    <div class="body">
+      <span class="maps">maps to · one_truth</span>
+      <p>Why? Because hedging is performance wearing a lab coat. We say the one true thing and stand on it,
+      instead of ten qualified maybes. Where we're honestly unsure, we say <i>that</i> plainly — and stop.</p>
+      <div class="sl"><p class="q">"The judge isn't built yet. We say so on the homepage."</p><p class="n">Commitment includes committing to the limit. Honesty reads as confidence.</p></div>
+      <div class="sl"><p class="q">"It will never talk you out of something that's real."</p><p class="n">One promise, unhedged. No "we try to" or "in most cases."</p></div>
+      <div class="dial"><div class="bar"></div><div class="ends"><span class="l">Quietly certain, no hedging</span><span class="r">Flat declarative, takes a side</span></div></div>
+    </div>
+  </div>
+
+  <div class="spread">
+    <div class="lbl"><div class="tag">Tenet 03</div><h3>We make contact.</h3></div>
+    <div class="body">
+      <span class="maps">maps to · landing_first + affect_contact</span>
+      <p>Why? Because generic copy talks <i>at</i> a category; real copy lands on a person in a specific
+      moment. We write to the reader who just watched their AI flatter them — not to "users." We make
+      contact with the actual feeling, and we never fake warmth.</p>
+      <div class="sl"><p class="q">"For the conversation about you — not a task."</p><p class="n">The COP page opens on the person, not the mechanism.</p></div>
+      <div class="sl"><p class="q">"It won't hype you up, and it won't talk you into quitting."</p><p class="n">Specific contact with the real fear, both directions. Not "we support you."</p></div>
+      <div class="dial"><div class="bar"></div><div class="ends"><span class="l">Warm, direct, to one person</span><span class="r">Unsparing, names the hard thing</span></div></div>
+    </div>
+  </div>
+
+  <div class="spread">
+    <div class="lbl"><div class="tag">Tenet 04</div><h3>We stop clean.</h3></div>
+    <div class="body">
+      <span class="maps">maps to · clean_exit</span>
+      <p>Why? Because the closing flourish is the most common performance of all. We end when the thought
+      is complete. No "in conclusion," no recap, no CTA that begs. The last line earns its place or it's cut.</p>
+      <div class="sl"><p class="q">"Receipts, not vibes."</p><p class="n">A close that's a fact, not a flourish. Then nothing.</p></div>
+      <div class="sl"><p class="q">"Run one free in two minutes."</p><p class="n">The CTA states the action and the cost. It doesn't sell the click.</p></div>
+      <div class="dial"><div class="bar"></div><div class="ends"><span class="l">Economical, ends on the point</span><span class="r">Abrupt, one-line drop-off</span></div></div>
+    </div>
+  </div>
+
+  <!-- WORD BANK -->
+  <h2 class="sec">Say / never say</h2>
+  <div class="bank">
+    <div class="say">
+      <h4>We say</h4>
+      <ul>
+        <li><b>warrant</b> — "is it still warranted?" (never "license")</li>
+        <li><b>hold</b>, <b>surface</b>, <b>abstain</b> — the three moves</li>
+        <li><b>the version that doesn't perform</b> (Lyra)</li>
+        <li><b>the version that doesn't resolve</b> (xOP)</li>
+        <li><b>no model grades model</b> · <b>receipts, not vibes</b></li>
+        <li>plain verbs: <b>run</b>, <b>paste</b>, <b>hold</b>, <b>name</b>, <b>stop</b></li>
+      </ul>
+    </div>
+    <div class="nope">
+      <h4>We never say</h4>
+      <ul>
+        <li>magic · magical · effortless</li>
+        <li>AI-powered · revolutionary · game-changing</li>
+        <li>unlock · supercharge · delight · seamless</li>
+        <li>in today's fast-paced world…</li>
+        <li>we're excited to · we're thrilled to</li>
+        <li>license (collides with the OSS LICENSE file)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WHAT IS LYRA -->
+  <h2 class="sec">Worked: what is Lyra?</h2>
+  <div class="ba">
+    <div class="card before">
+      <p class="t">Before · performing</p>
+      <p>Lyra is a revolutionary AI-powered quality layer that supercharges your prompts with cutting-edge
+      behavioral intelligence to unlock delightfully human responses across every model.</p>
+    </div>
+    <div class="card after">
+      <p class="t">After · awaken voice</p>
+      <p>Lyra is a behavior layer for AI instructions. It finds the spots where your prompt makes the model
+      perform — agreeing too fast, over-explaining, wrapping up for the sake of it — and rewrites them. Same
+      deliverable. Cleaner conduct. With receipts.</p>
+    </div>
+  </div>
+
+  <h2 class="sec">Worked: Lyra vs xOP, in one breath each</h2>
+  <div class="ba">
+    <div class="card after">
+      <p class="t">Lyra</p>
+      <p><b>The version that doesn't perform.</b> Rewrites how a model behaves while it does any task —
+      less agreement reflex, less filler, cleaner endings.</p>
+    </div>
+    <div class="card after">
+      <p class="t">xOP</p>
+      <p><b>The version that doesn't resolve.</b> A procedure for the calls that shouldn't be rushed to an
+      answer — it holds the judgment instead of closing it. Its variants are COP (coaching) and WOP (writing).</p>
+    </div>
+  </div>
+
+  <h2 class="sec">Next</h2>
+  <div class="spread">
+    <div class="lbl"><div class="tag">Hand-off</div><h3>Then we write the pages.</h3></div>
+    <div class="body">
+      <p>This guide locks the voice. The page copy gets written in the <b>TELL / SEE / PROVE / DO</b>
+      framework (see the content map), every line gut-checked against <i>"is this true, or performing?"</i>
+      and scored on the four tenets before it ships.</p>
+      <p class="mut">If a line can't survive its own shadow scan, it doesn't go on the site that sells the
+      shadow scan.</p>
+    </div>
+  </div>
+
+  <footer>
+    <hr style="margin-bottom:22px"/>
+    Voice &amp; Tone · awaken.fyi · Lyra Labs · v0.1 draft<br/>
+    <span class="mono">The voice is the proof. If it performs, it's wrong.</span>
+  </footer>
+
+</div>
+</body>
+</html>

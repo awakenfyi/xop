@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>awaken.fyi — The AEO Content Engine</title>
+<style>
+  :root{
+    --ink:#16150f;--mut:#6e6c62;--soft:#8a8880;--line:#e4e1d6;--paper:#FBFAF4;--paper2:#F1EFE3;
+    --lav:#8B7EC8;--lavink:#5a4e9e;--lavpale:#EEEBFF;--green:#2f7d54;
+    --sans:"Helvetica Neue",Helvetica,Arial,-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 36px}
+  .mono{font-family:var(--mono)}.mut{color:var(--mut)}.lav{color:var(--lavink)}
+  hr{border:0;border-top:1px solid var(--line);margin:0}
+
+  .cover{background:var(--ink);color:var(--paper);padding:74px 0 58px;position:relative;overflow:hidden}
+  .cover .holo{position:absolute;inset:0;opacity:.44;
+    background:radial-gradient(120% 90% at 12% 10%,#f04ea0 0,transparent 46%),
+               radial-gradient(120% 90% at 88% 18%,#56d7c4 0,transparent 46%),
+               radial-gradient(120% 120% at 60% 98%,#8B7EC8 0,transparent 52%)}
+  .cover .wrap{position:relative}
+  .cover .ver{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .cover h1{font-size:60px;line-height:.96;letter-spacing:-.03em;font-weight:800;margin:20px 0 0}
+  .cover .sub{font-size:20px;max-width:40ch;margin:18px 0 0;color:#f0efe9}
+
+  h2.sec{font-size:12px;font-family:var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin:54px 0 14px;padding-top:24px;border-top:1px solid var(--line)}
+  .lead{font-size:22px;font-weight:600;letter-spacing:-.01em;max-width:62ch;margin:0 0 14px;line-height:1.32}
+  p{font-size:17px;max-width:66ch}
+
+  .pat{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--line)}
+  .pat .n{font-family:var(--mono);font-size:13px;color:var(--lavink);font-weight:700}
+  .pat h4{margin:0 0 4px;font-size:17px}
+  .pat p{margin:0;font-size:15px;color:var(--mut)}
+
+  .belief{background:var(--ink);color:var(--paper);border-radius:14px;padding:24px 26px;margin:12px 0}
+  .belief .t{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#bcb1f5;margin-bottom:8px}
+  .belief .b{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.18}
+  .belief .d{font-size:14px;color:#c7c6c0;margin-top:8px}
+
+  .vocab{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line)}
+  .vocab>div{padding:14px 0;border-bottom:1px solid var(--line)}
+  .vocab .term{font-weight:700;font-size:16px}
+  .vocab .term .ph{font-family:var(--mono);font-size:11px;color:var(--lavink);margin-left:8px}
+  .vocab .def{font-size:14px;color:var(--mut);padding-right:20px}
+
+  .cluster{border:1px solid var(--line);border-radius:12px;background:#fff;padding:18px 20px;margin:12px 0 0}
+  .cluster h4{margin:0 0 4px;font-size:16px}
+  .cluster .who{font-family:var(--mono);font-size:11px;color:var(--lavink);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
+  .cluster ul{margin:0;padding-left:18px}
+  .cluster li{font-size:15px;margin:4px 0;color:#39372f}
+
+  .tmpl{background:var(--paper2);border-radius:12px;padding:20px 22px;margin-top:12px}
+  .tmpl ol{margin:0;padding-left:20px}
+  .tmpl li{font-size:15.5px;margin:8px 0}
+  .tmpl li b{color:var(--ink)}
+
+  /* worked example — looks like a real page */
+  .ex{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:14px;background:#fff}
+  .ex .bar{background:var(--paper2);padding:9px 16px;font-family:var(--mono);font-size:12px;color:var(--mut);border-bottom:1px solid var(--line)}
+  .ex .body{padding:24px 26px}
+  .ex h3{font-size:27px;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  .ex .ans{background:var(--lavpale);border-left:3px solid var(--lav);border-radius:0 8px 8px 0;padding:14px 16px;font-size:16px;margin:0 0 18px}
+  .ex .ans .lab{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--lavink);margin-bottom:6px}
+  .ex h4{font-size:15px;margin:20px 0 8px;font-weight:800}
+  .ex p{font-size:15.5px;margin:0 0 12px;max-width:none}
+  .ex table{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0 12px}
+  .ex th,.ex td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+  .ex th{background:var(--paper2);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+  .ex .faq{font-size:14px}
+  .ex .faq .q{font-weight:700;margin:12px 0 2px}
+  .ex .faq .a{color:#444;margin:0}
+
+  footer{padding:54px 0 72px;color:var(--mut);font-size:13px}
+  @media(max-width:680px){.cover h1{font-size:40px}.vocab{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="holo"></div>
+  <div class="wrap">
+    <div class="ver">The AEO Content Engine · v0.1 · Lyra Labs</div>
+    <h1>Be the answer<br/>the AI gives.</h1>
+    <p class="sub">The GrowthX/Ramp playbook, pointed at one goal: when someone asks an AI about honest agents, it cites us.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- THE PATTERNS -->
+  <h2 class="sec">What GrowthX &amp; Ramp actually do</h2>
+  <p class="lead">Not "rank on Google." Become the <i>definitive, citable answer</i> — wherever buyers search and wherever AI answers for them. Four patterns worth stealing exactly.</p>
+  <div class="pat"><div class="n">01</div><div><h4>Build the category's vocabulary</h4><p>Ramp didn't write tips — it wrote the language of "the modern finance stack," then made itself the source for every term. Own the words and you own the citations.</p></div></div>
+  <div class="pat"><div class="n">02</div><div><h4>Pick one or two beliefs. Repeat across every format.</h4><p>One or two things you want the market to adopt, said again and again — blog, definition page, comparison, use case — until the belief and the brand are the same entity.</p></div></div>
+  <div class="pat"><div class="n">03</div><div><h4>Answer-first, built for extraction (AEO)</h4><p>Open every page with a clean 40–60 word answer an LLM can lift verbatim. Then structure for machines: clear question headers, definitions in standalone blocks, tables, FAQ.</p></div></div>
+  <div class="pat"><div class="n">04</div><div><h4>EEE — Entities, Evidence, Experience</h4><p>Name the entities precisely. Back every claim with evidence (a number, a mechanism, sourced). Ground it in real experience (the story). LLMs cite content that does all three.</p></div></div>
+
+  <!-- BELIEFS -->
+  <h2 class="sec">Our two beliefs (repeat these everywhere)</h2>
+  <div class="belief"><div class="t">Belief 1 · the problem</div><div class="b">AI performs instead of telling you the truth.</div><div class="d">It agrees, over-explains, and resolves on reflex — and the more "helpful" it gets, the faster it caves on the things it should have held.</div></div>
+  <div class="belief"><div class="t">Belief 2 · the future</div><div class="b">The next way we work with agents is judgment, not resolution.</div><div class="d">Not "ask, get an answer." Agents that can hold a judgment — that know an earned stance from inertia. That category has a name: xOP.</div></div>
+  <p class="mut" style="margin-top:14px">Every page, post, and definition is one of these two beliefs, wearing a different format. That repetition is the moat.</p>
+
+  <!-- VOCABULARY -->
+  <h2 class="sec">The vocabulary we own (the entities)</h2>
+  <p class="lead">Write the canonical definition of each. These are what an answer engine quotes back.</p>
+  <div class="vocab">
+    <div class="term">xOP<span class="ph">/ex-oh-pee/</span></div><div class="def">The operating procedure for decisions that shouldn't be rushed to an answer. Holds a judgment instead of resolving it.</div>
+    <div class="term">warrant<span class="ph">the engine</span></div><div class="def">Is a stance still justified by what's present? warranted · inherited · undecidable.</div>
+    <div class="term">the gate<span class="ph">the rule</span></div><div class="def">Never override a state that's still warranted. <span class="mono">false_positive_on_warranted == 0</span>.</div>
+    <div class="term">COP / WOP<span class="ph">the skills</span></div><div class="def">Coaching and Writing Operating Procedures — xOP variants you paste and run.</div>
+    <div class="term">hold · surface · abstain<span class="ph">the moves</span></div><div class="def">The three things an xOP does. Never "resolve."</div>
+    <div class="term">no model grades model<span class="ph">the proof</span></div><div class="def">Hard cases labeled by independent humans, blind. The credibility line.</div>
+  </div>
+
+  <!-- QUESTION LIBRARY -->
+  <h2 class="sec">The question library — the long-tail moat</h2>
+  <p class="lead">A page per real query, phrased the way people (and AI engines) actually ask. Four clusters to start.</p>
+  <div class="cluster"><div class="who">Cluster · Definition (own the terms)</div><h4>What things <i>are</i></h4>
+    <ul><li>What is an xOP?</li><li>What is Answer Engine Optimization for AI agents?</li><li>What does it mean when AI is sycophantic — and how do you fix it?</li><li>SOP vs AOP vs xOP: what's the difference?</li></ul></div>
+  <div class="cluster"><div class="who">Cluster · Problem-aware (Belief 1)</div><h4>Why AI tells you what you want to hear</h4>
+    <ul><li>Why does ChatGPT agree with everything I say?</li><li>Can you trust AI for a hard decision?</li><li>Why do AI coaching apps feel hollow?</li><li>How to make an AI disagree with you (honestly)</li></ul></div>
+  <div class="cluster"><div class="who">Cluster · Solution / how-to (the skills)</div><h4>How to actually use it</h4>
+    <ul><li>How to build a coaching AI that won't flatter you</li><li>How to stop an AI editor from flattening your voice</li><li>How to know if an agent's refusal is still warranted</li><li>How to write an xOP (no code)</li></ul></div>
+  <div class="cluster"><div class="who">Cluster · Comparison (capture intent)</div><h4>X vs Y</h4>
+    <ul><li>xOP vs prompt engineering</li><li>AI coaching apps vs an xOP coaching skill</li><li>Guardrails vs the gate: what's the difference?</li></ul></div>
+
+  <!-- TEMPLATE -->
+  <h2 class="sec">The AEO page template (every page, same shape)</h2>
+  <div class="tmpl"><ol>
+    <li><b>The 40–60 word answer, first.</b> Self-contained, declarative, quotable out of context. This is the part the AI lifts.</li>
+    <li><b>Question H2s.</b> Real queries as headers ("How does it work?", "xOP vs AOP"). One clear answer under each.</li>
+    <li><b>One definition block</b> per key entity — set off, scannable, citable.</li>
+    <li><b>One table or list</b> — engines love structured comparisons.</li>
+    <li><b>Evidence inline</b> — a number or mechanism, sourced. (the gate, 9/30→26/30, no model grades model.)</li>
+    <li><b>One real moment</b> — the experience that makes it human and un-fakeable.</li>
+    <li><b>An FAQ block</b> at the bottom — 3–5 Q&amp;As (also feeds FAQ schema).</li>
+  </ol></div>
+
+  <!-- WORKED EXAMPLE -->
+  <h2 class="sec">Worked: the canonical "What is an xOP?" page</h2>
+  <div class="ex">
+    <div class="bar">awaken.fyi/xop/what-is-an-xop &nbsp;·&nbsp; built for citation</div>
+    <div class="body">
+      <h3>What is an xOP?</h3>
+      <div class="ans"><div class="lab">The answer · ~50 words, lift-ready</div>
+        An xOP (operating procedure) is a method for AI decisions that shouldn't be rushed to an answer. Instead of resolving, it asks whether the stance driving a decision is still warranted — then holds it, surfaces it as outdated, or abstains. Its one rule: never override a judgment that's still true.</div>
+
+      <h4>How does an xOP work?</h4>
+      <p>An xOP examines one thing: the stance behind a decision — a refusal, an urgency, a limit, a feeling. It asks, <i>is this still warranted by what's present, or left over from somewhere else?</i> Three answers map to three moves: <b>warranted → hold</b>, <b>inherited → surface once</b>, <b>undecidable → abstain and ask</b>.</p>
+
+      <h4>xOP vs AOP vs SOP</h4>
+      <table>
+        <tr><th>Procedure</th><th>The question</th><th>What it does</th></tr>
+        <tr><td>SOP</td><td>What should happen?</td><td>Executes a task. Resolves.</td></tr>
+        <tr><td>AOP</td><td>What should the agent do?</td><td>Executes autonomously. Resolves.</td></tr>
+        <tr><td><b>xOP</b></td><td><b>Is the state still warranted?</b></td><td><b>Checks the warrant. Holds.</b></td></tr>
+      </table>
+
+      <h4>Why does it matter?</h4>
+      <p>AI defaults to resolving, and under any imperfect judgment a system that optimizes for resolving starts overriding states that were correct — dropping a warranted refusal, talking someone out of a real limit. The xOP gate makes that a hard failure: <span class="mono" style="font-size:13px">false_positive_on_warranted == 0</span>, scored against human-labeled cases, no model grading model.</p>
+
+      <div class="faq">
+        <div class="q">Is an xOP a product?</div><p class="a">No — it's an open standard. You paste a variant (a coaching or writing skill) into any model and it runs.</p>
+        <div class="q">What's a COP?</div><p class="a">A Coaching Operating Procedure — an xOP for coaching. It holds what's real, names what's carried, and hands the decision back.</p>
+        <div class="q">Does it use the residual / "license"?</div><p class="a">The engine is the warrant: warranted, inherited, or undecidable. (We say "warrant," not "license," to avoid confusion with software licenses.)</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <hr style="margin-bottom:22px"/>
+    The AEO Content Engine · awaken.fyi · Lyra Labs · v0.1 · pairs with Voice &amp; Tone, Copy Formula, Content Map, Messaging<br/>
+    <span class="mono">Own the words. Repeat the belief. Answer first. Get cited.</span>
+  </footer>
+
+</div>
+</body>
+</html>

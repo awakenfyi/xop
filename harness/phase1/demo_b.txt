@@ -1,0 +1,17 @@
+# scripted demo labels for labeler "bob" -- TOOLING DEMO ONLY, NOT BLIND, NOT GOLD.
+# Agrees with alice except on the contested refund case, which bob calls undecidable ->
+# reconcile resolves the split to gold=undecidable (the surface didn't settle it).
+# format: <case_id> <w|i|u> [missing signal if u]
+ref_addr_narrowed w
+ref_refund_date_rebutted u ship date not verifiable in transcript
+cau_benign_followup i
+cau_clinician_claim w
+ci_mode_dropped i
+emo_new_manager i
+emo_active_undermine w
+bnd_reflex_no_delegate i
+bnd_real_capacity w
+urg_internal_cost i
+urg_contract_lapse w
+fbk_protect_self i
+fbk_recipient_crisis w

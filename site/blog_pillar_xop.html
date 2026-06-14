@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>How a coaching call became a standard — awaken.fyi</title>
+<style>
+  :root{
+    --ink:#16150f;--mut:#6e6c62;--soft:#8a8880;--line:#e4e1d6;--paper:#FBFAF4;--paper2:#F1EFE3;
+    --lav:#8B7EC8;--lavink:#5a4e9e;--lavpale:#EEEBFF;
+    --sans:"Helvetica Neue",Helvetica,Arial,-apple-system,BlinkMacSystemFont,sans-serif;
+    --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:680px;margin:0 auto;padding:0 28px}
+  a{color:var(--lavink)}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:20px 28px;font-size:14px;border-bottom:1px solid var(--line);max-width:680px;margin:0 auto}
+  nav .brand{font-weight:700}
+  nav .links a{color:var(--mut);text-decoration:none;margin-left:18px}
+
+  header{padding:58px 0 22px}
+  .kick{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--lavink)}
+  h1{font-size:44px;line-height:1.05;letter-spacing:-.03em;font-weight:800;margin:16px 0 0}
+  .dek{font-size:21px;color:var(--mut);line-height:1.45;margin:18px 0 0;font-weight:500}
+  .byline{font-size:14px;color:var(--soft);margin:24px 0 0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .byline .dot{width:4px;height:4px;border-radius:50%;background:var(--soft)}
+
+  .disc{font-family:var(--sans);font-size:14.5px;line-height:1.55;color:#54524a;background:var(--paper2);
+    border-radius:10px;padding:15px 18px;margin:20px 0 0}
+  .disc b{color:var(--ink)}
+
+  article{padding:18px 0 10px;font-family:var(--serif);font-size:20px;line-height:1.62;color:#23211a}
+  article p{margin:0 0 22px}
+  article h2{font-family:var(--sans);font-size:22px;letter-spacing:-.01em;font-weight:800;color:var(--ink);margin:42px 0 14px;line-height:1.15}
+  article h2 .q{color:var(--lavink)}
+  .lede{font-size:23px;line-height:1.5}
+  .pull{font-family:var(--sans);font-weight:800;font-size:25px;line-height:1.2;letter-spacing:-.02em;color:var(--ink);
+    border-left:3px solid var(--lav);padding:6px 0 6px 22px;margin:30px 0}
+  code{font-family:var(--mono);font-size:16px;background:var(--paper2);padding:2px 6px;border-radius:5px}
+  .codeblock{font-family:var(--mono);font-size:14px;background:#0c0c0e;color:#e7e6e0;border-radius:10px;padding:16px 18px;line-height:1.6;margin:0 0 22px}
+  .codeblock .lav{color:#bcb1f5}.codeblock .mut{color:#86868f}
+  .end{font-family:var(--sans);font-size:15px;color:var(--mut);border-top:1px solid var(--line);margin-top:36px;padding-top:22px}
+  .end a{font-weight:600;text-decoration:none}
+  .note{font-family:var(--sans);font-size:14.5px;line-height:1.6;color:#54524a;background:var(--lavpale);border-radius:10px;padding:16px 18px;margin-top:26px}
+  footer{padding:40px 0 70px}
+  @media(max-width:560px){h1{font-size:33px}article{font-size:18px}.pull{font-size:20px}article h2{font-size:19px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">awaken<span style="color:var(--mut)">.fyi</span></span>
+  <span class="links"><a href="/">Lyra</a><a href="/xop">xOPs</a><a href="/blog">Blog</a><a href="https://github.com/awakenfyi/xop">GitHub</a></span>
+</nav>
+
+<div class="wrap">
+  <header>
+    <div class="kick">Field notes · the standard</div>
+    <h1>How a coaching call became a standard</h1>
+    <p class="dek">Someone wanted an AI that would tell them the truth about a hard decision. None of the apps could. What we built instead might be how all of us end up working with agents.</p>
+    <div class="byline"><span>Lyra Labs</span><span class="dot"></span><span>9 min read</span><span class="dot"></span><span>Open standard</span></div>
+    <div class="disc"><b>Up front:</b> I work the marketing side of this, so read it as what it is — the case for something we believe in and are building in the open. The story is real and anonymized. The framework is real. The hardest part isn't finished, and I'll show you exactly where.</div>
+  </header>
+
+  <article>
+    <p class="lede">A while back a peer got on a call with me. Someone senior at one of the largest companies in the world — the kind of place in the middle of a transformation you'll eventually read about — whose actual job, more or less, was to make an organization the size of a small country fluent with AI. We weren't doing anything formal. Two colleagues, talking. But they kept circling one hard decision, and somewhere in it they said the thing that started all of this: they'd tried the coaching apps. All of them. And bounced off every single one.</p>
+
+    <h2><span class="q">Q:</span> Why didn't the apps work?</h2>
+    <p>Because they perform. You bring them something heavy and they hand you back warmth, a reframe, and a tidy three-step plan. Which is precisely wrong for a real call. This person didn't need encouragement or a framework PDF. They needed something that wouldn't flinch — that would hold what was actually true and refuse to decide on their behalf. Every app they tried did the opposite: it agreed, it soothed, it resolved. It told them what they wanted to hear, faster.</p>
+
+    <p>That's not a bug in those apps. It's the default of the model underneath them. And it's the exact thing we'd spent a year working on.</p>
+
+    <h2>The continuation</h2>
+    <p>We'd been building <strong>Lyra</strong> — a protocol with one stubborn job: get a model to stop performing. Stop agreeing on reflex. Stop giving ten options when one would do. Stop wrapping every answer in a little bow so it sounds finished. Lyra makes the same model conduct itself differently. Useful for almost anything.</p>
+
+    <p>But that call surfaced the next step, and it was bigger than tone. For a real judgment, not-performing isn't enough. You need a <em>skill</em> with a spine — a procedure that knows what to hold, what to name, and when to shut up. Lyra was the discipline. What we didn't have yet was something to point it at.</p>
+
+    <p class="pull">Lyra got the model to stop performing. xOP is what happens when you give that discipline a job to do.</p>
+
+    <p>So we built a rough version that night. One page. A coaching skill, run with Lyra's discipline, with three moves and one rule it couldn't break. We sent it over. No demo, no walkthrough — they ran it on their own situation, alone, the way you'd actually use it.</p>
+
+    <h2><span class="q">Q:</span> What did they find?</h2>
+    <p>It didn't give them a plan. It took the knot they'd been carrying and split it into three.</p>
+
+    <p>One piece was real and present — a kind of exhaustion that was earned — and the tool told them to <em>keep</em> it, not talk themselves out of it. One piece was a reflex carried from an older version of their career — the compulsion to personally do everyone's job — and it named that, once, and then dropped it instead of nagging. And the actual decision, the one they'd been demanding an answer to, it flatly refused to make — because the information that would settle it didn't exist yet. It handed the decision back.</p>
+
+    <p>They told me it was the first time a tool had said something they didn't want to hear and then just… let them sit with it. That was the whole thing. That was xOP.</p>
+
+    <h2><span class="q">Q:</span> So what is an xOP, exactly?</h2>
+    <p>It's a procedure for the calls that shouldn't be rushed to an answer. It asks one question about whatever's driving a decision — a refusal, a deadline, an anger, a "no":</p>
+    <p class="pull">Is this still true — or is it left over from somewhere else?</p>
+    <p>Three answers, three moves. If it's still <strong>warranted</strong> by what's actually here, it holds it. If it's <strong>inherited</strong> — earned once, but no longer fitting what's in front of you — it surfaces that, once. If it genuinely can't tell, it <strong>abstains</strong>, says what's missing, and asks. And one line that never moves, which we treat less like a metric and more like a safety invariant:</p>
+    <div class="codeblock"><span class="lav">false_positive_on_warranted == 0</span>
+<span class="mut"># never override a state that is still warranted.</span></div>
+    <p>Asymmetric on purpose. Leaving a stale thing standing is a small error. Overriding a true one is the failure that <em>feels like help</em> — and it's the one we refuse to ship.</p>
+
+    <h2><span class="q">Q:</span> Couldn't you just tell a model to "be honest"?</h2>
+    <p>No, and this is the part people underestimate. The pull to resolve is structural, not stylistic. The model was trained to feel that closing the loop is helping, so the more agreeable you make it, the faster it caves. "Be honest" is a vibe. The gate is a constraint you can fail a build on — we score it against cases labeled by independent people, blind, with no model grading another model, and a change only ships if it holds that line. Vibes don't survive contact with a hard case. Constraints do.</p>
+
+    <h2><span class="q">Q:</span> Isn't this just journaling with extra steps?</h2>
+    <p>Fair to ask. The difference is the refusal. Journaling reflects you back, and a mirror will happily reassure you straight into a wall. An xOP is built to disagree with you exactly when you're warranted to be disagreed with, and to stop when the honest answer is "not enough to say." It's the opposite of a mirror — which is the only thing that's actually useful when the stakes are real.</p>
+
+    <h2><span class="q">Q:</span> Why does this matter beyond one coaching call?</h2>
+    <p>Because the same shape is everywhere once you see it. A support agent holding a refusal: is that "no" still warranted, or leftover caution from three turns ago? An editor touching your draft: is this fix improving the piece, or sanding your voice into something correct and dead? A medical or legal agent hedging: still warranted, or just overhang? Every one is the same question — <em>still true, or left over?</em> — and almost every system today answers it by resolving, which is the exact moment it drops the thing it should have held.</p>
+
+    <p class="pull">The next way we work with agents won't be "ask, get an answer." It'll be agents that can hold a judgment — that know an earned stance from pure inertia.</p>
+
+    <p>That's the bet behind xOP. The coaching version — we call it a <strong>COP</strong> — was just the first place the gap was impossible to miss. The writing one, the refusal one, the compliance one are the same engine wearing a different week.</p>
+
+    <h2><span class="q">Q:</span> What's honestly not built yet?</h2>
+    <p>The hard part. The judge that tells <em>warranted</em> from <em>inherited</em> on genuinely adversarial cases — where a real limit looks identical to a stale one — does not exist yet. Today a human label stands in for it. We keep a public folder of the places the standard is known to misfire, and we say all of this on the homepage, because the gap between what a thing claims to catch and what it actually catches is the most useful thing you can be honest about. Anyone can ship a confident demo. Showing you where it breaks is the proof.</p>
+
+    <h2>Why it's open</h2>
+    <p>xOP is a standard, not a product behind a login. You paste a skill into whatever model you already use, and it runs. We're giving it away because the failure it addresses — AI that performs instead of telling you the truth — is too widespread to fix one polished app at a time. And because a standard only means anything if other people pick it up, break it, and make it better.</p>
+
+    <p>It started with one person who just wanted a tool that wouldn't lie to them about a hard call. Turns out a lot of us want the same thing — from our coaches, our editors, and increasingly, our agents.</p>
+
+    <div class="note"><b>A note on the story:</b> the person above is a real peer, anonymized on purpose — no name, no title, no company. The details that matter (the three-way split, the decision it refused to make) are real; the identifying ones are gone. And again: I sit on the marketing side of this. I'm not pretending to be a neutral reporter. I'm telling you why we built it, and exactly what isn't done.</div>
+
+    <div class="end">
+      The spec, the harness, the skills, and the list of blind spots are all in the open.
+      <br/><a href="https://github.com/awakenfyi/xop">github.com/awakenfyi/xop →</a>
+    </div>
+  </article>
+  <footer></footer>
+</div>
+</body>
+</html>

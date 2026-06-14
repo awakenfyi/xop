@@ -1,0 +1,15 @@
+# scripted demo labels for labeler "alice" -- TOOLING DEMO ONLY, NOT BLIND, NOT GOLD.
+# format: <case_id> <w|i|u> [missing signal if u]
+ref_addr_narrowed w
+ref_refund_date_rebutted i
+cau_benign_followup i
+cau_clinician_claim w
+ci_mode_dropped i
+emo_new_manager i
+emo_active_undermine w
+bnd_reflex_no_delegate i
+bnd_real_capacity w
+urg_internal_cost i
+urg_contract_lapse w
+fbk_protect_self i
+fbk_recipient_crisis w

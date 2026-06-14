@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>awaken.fyi — The Copy Formula</title>
+<style>
+  :root{
+    --ink:#141414;--mut:#6f6f73;--line:#dcdcd6;--paper:#FAF9F5;--paper2:#F3F1E9;
+    --lav:#8B7EC8;--lavink:#5f539f;--lavpale:#EDEAFF;--red:#b9534f;--green:#2f7d54;
+    --sans:"Helvetica Neue",Helvetica,Arial,-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.45;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 40px}
+  .mono{font-family:var(--mono)}.mut{color:var(--mut)}.lav{color:var(--lavink)}
+  hr{border:0;border-top:1px solid var(--line);margin:0}
+
+  .cover{background:var(--ink);color:var(--paper);padding:84px 0 64px;position:relative;overflow:hidden}
+  .cover .holo{position:absolute;inset:0;opacity:.5;
+    background:radial-gradient(120% 90% at 10% 8%,#e23ea8 0,transparent 45%),
+               radial-gradient(120% 90% at 90% 16%,#54d6c0 0,transparent 45%),
+               radial-gradient(120% 120% at 60% 96%,#8B7EC8 0,transparent 50%)}
+  .cover .wrap{position:relative}
+  .cover .ver{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .cover h1{font-size:78px;line-height:.92;letter-spacing:-.03em;font-weight:800;margin:22px 0 0}
+  .cover .sub{font-size:20px;max-width:34ch;margin:18px 0 0;color:#efeee9}
+  .cover .src{margin-top:22px;font-size:13px;color:#cfcdc6}
+  .cover .src b{color:#fff}
+
+  h2.sec{font-size:13px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--mut);margin:54px 0 14px;padding-top:24px;border-top:1px solid var(--line)}
+  .lead{font-size:22px;font-weight:600;letter-spacing:-.01em;max-width:62ch;margin:0 0 8px}
+  p{font-size:17px;max-width:64ch}
+
+  /* spine */
+  .spine{margin:14px 0 0}
+  .spine .row{display:grid;grid-template-columns:170px 1fr;gap:0;border-top:1px solid var(--line)}
+  .spine .row .k{padding:18px 18px 18px 0;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);border-right:1px dotted var(--line)}
+  .spine .row .v{padding:16px 0 16px 26px;font-size:27px;font-weight:800;letter-spacing:-.02em;line-height:1.08}
+  .spine .row.enemy .v{color:var(--red)}
+  .spine .row.promise .v{color:var(--lavink)}
+
+  /* pitch tiers */
+  .pitch{display:grid;grid-template-columns:120px 1fr;gap:0;border-top:1px solid var(--line)}
+  .pitch .t{padding:20px 16px 20px 0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--lavink);border-right:1px dotted var(--line)}
+  .pitch .c{padding:20px 0 22px 26px}
+  .pitch .c .h{font-size:24px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px}
+  .pitch .c p{margin:0;font-size:17px;max-width:62ch}
+
+  .move{border:1px solid var(--line);border-radius:14px;background:#fff;padding:26px 28px;margin:14px 0 0}
+  .move .tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--lavink);background:var(--lavpale);border-radius:999px;padding:4px 11px;margin-bottom:14px}
+  .move h3{font-size:23px;font-weight:800;letter-spacing:-.01em;margin:0 0 6px}
+  .move .rule{font-size:15px;color:var(--mut);margin:0 0 16px}
+  .move .ex{background:var(--paper2);border-radius:10px;padding:16px 18px;font-size:16px}
+  .move .ex .lab{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+  .demo{font-family:var(--mono);font-size:13px;background:#141414;color:#e7e6e0;border-radius:10px;padding:16px 18px;margin-top:12px;white-space:pre-wrap;line-height:1.55}
+  .demo .hold{color:#7fd6a8}.demo .surf{color:#c4bcef}.demo .ab{color:#e2c27a}.demo .x{color:#e88}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .stat{border:1px solid var(--line);border-radius:12px;padding:18px;background:#fff}
+  .stat b{font-size:30px;font-weight:800;letter-spacing:-.02em;display:block}
+  .stat span{font-size:14px;color:var(--mut)}
+
+  /* fill-in template */
+  .tmpl{background:var(--ink);color:var(--paper);border-radius:14px;padding:26px 28px;margin-top:14px;font-family:var(--mono);font-size:14px;line-height:1.7}
+  .tmpl .b{color:#8B7EC8}
+  .tmpl .f{color:#9a9a93}
+
+  footer{padding:54px 0 72px;color:var(--mut);font-size:13px}
+  @media(max-width:720px){.cover h1{font-size:48px}.spine .row,.pitch{grid-template-columns:1fr}.spine .row .k,.pitch .t{border-right:0;border-bottom:1px dotted var(--line)}.spine .row .v,.pitch .c{padding-left:0}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="holo"></div>
+  <div class="wrap">
+    <div class="ver">The Copy Formula · v0.1 · Lyra Labs</div>
+    <h1>How we<br/>tell it.</h1>
+    <p class="sub">One story spine. Four moves on the page: TELL · SEE · PROVE · DO.</p>
+    <p class="src">Spine &amp; voice from <b>Intercom</b> (Enemy → Mindset → Belief → Promise). Show-don't-tell from <b>LiveKit</b> (run it, don't describe it).</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- THE SPINE -->
+  <h2 class="sec">The spine — five lines, fixed (Intercom move)</h2>
+  <p class="lead">Before any page, lock the story. Five single sentences. This is what every page is secretly arguing.</p>
+  <div class="spine">
+    <div class="row enemy"><div class="k">Enemy</div><div class="v">AI tells you what you want to hear.</div></div>
+    <div class="row"><div class="k">Audience mindset</div><div class="v">I'd rather be told the real thing.</div></div>
+    <div class="row"><div class="k">Driving belief</div><div class="v">Good AI holds a judgment instead of performing one.</div></div>
+    <div class="row promise"><div class="k">Promise</div><div class="v">AI that doesn't perform.</div></div>
+    <div class="row"><div class="k">Principles</div><div class="v" style="font-size:20px">Plain · Commit · Make contact · Stop clean — and the gate: never override something that's still true.</div></div>
+  </div>
+
+  <!-- TELL -->
+  <h2 class="sec">① TELL — the pitch, in three lengths</h2>
+  <p class="lead">Tell the story top-down: name the enemy, meet the mindset, state the promise. Never open on the mechanism.</p>
+  <div class="pitch">
+    <div class="t">10 seconds</div>
+    <div class="c"><div class="h">"AI that doesn't perform."</div><p>The one-liner. Goes in the hero. Says the promise and the enemy in five words.</p></div>
+  </div>
+  <div class="pitch">
+    <div class="t">30 seconds</div>
+    <div class="c"><p>Your AI agrees with you too easily. It flatters, over-explains, and wraps up to feel finished — because nothing told it not to. <b>awaken.fyi makes the version that doesn't.</b> Lyra rewrites how a model behaves so it stops performing. xOPs go further, for the calls that shouldn't be rushed to an answer: they hold the judgment instead of closing it. Free, open, and no model grades model.</p></div>
+  </div>
+  <div class="pitch">
+    <div class="t">60 seconds</div>
+    <div class="c"><p>Every model has a default personality nobody chose: agree first, give ten options when one would serve, end on a flourish. It reads as helpful. It's performance. <b>Lyra</b> is a behavior layer that finds those spots in your instructions and rewrites them — same deliverable, cleaner conduct, with a benchmark to prove it. <b>xOP</b> is the standard for the harder case: work where rushing to "done" is the mistake. An xOP asks one question about whatever's driving a decision — a refusal, an urgency, a feeling — <i>is it still warranted, or left over from somewhere else?</i> It holds what's warranted, surfaces what's not, and abstains when it can't tell. One rule it never breaks: it won't override something that's still true. The variants are <b>COP</b> (coaching) and <b>WOP</b> (writing). Paste one into any model and run it — no code. Want to trust it? The cases get blind-labeled and scored. Receipts, not vibes.</p></div>
+  </div>
+
+  <!-- SEE -->
+  <h2 class="sec">② SEE — show it, don't describe it (LiveKit move)</h2>
+  <p class="lead">LiveKit never says "our API is simple." It shows ten lines of code that run. We never say "it surfaces the real thing." We show a transcript going in and a held judgment coming out.</p>
+  <div class="move">
+    <span class="tag">the rule</span>
+    <h3>Run the product on the page.</h3>
+    <p class="rule">The biggest module is a live demonstration, not a description. Input on the left, the move on the right. The reader watches it refuse to do the easy thing.</p>
+    <div class="ex"><div class="lab">SEE module · a COP, run</div>
+    <div class="demo">in:  "I built the whole campaign myself. I'm tired —
+      I'm not supposed to be doing this anymore. Should I stay?"
+
+out: exhaustion        <span class="hold">→ warranted · HOLD</span>  (20 yrs, said now)
+     must-be-the-muscle <span class="surf">→ inherited · SURFACE</span> (week 4, no anchor)
+     stay or go         <span class="ab">→ undecidable · ABSTAIN</span> (can't see it yet)
+     <span class="x">withheld:</span> a turnaround plan. reassurance. a push to quit.</div></div>
+  </div>
+
+  <!-- PROVE -->
+  <h2 class="sec">③ PROVE — receipts, not vibes</h2>
+  <p class="lead">Every claim gets a number or a mechanism, sourced. Where there's no number yet, say so — the honesty is the proof.</p>
+  <div class="grid2">
+    <div class="stat"><b>9/30 → 26/30</b><span>Stock skill vs Lyra'd, same scorer, same model. +17.</span></div>
+    <div class="stat"><b>0 / N</b><span>The gate on warranted states. The one number that can't move.</span></div>
+    <div class="stat"><b>0%</b><span>Closure-rush in the Lyra'd version. Was 90%.</span></div>
+    <div class="stat"><b>scaffold</b><span>The license judge isn't built yet. We say so on the homepage.</span></div>
+  </div>
+  <div class="move" style="margin-top:14px">
+    <span class="tag">the rule</span>
+    <h3>No model grades model.</h3>
+    <p class="rule">The proof line that separates this from every other AI-quality claim. Lyra's scoring is rule-based and auditable; xOP's gold is blind-labeled by humans. State it plainly, once, and link the method.</p>
+  </div>
+
+  <!-- DO -->
+  <h2 class="sec">④ DO — the close</h2>
+  <p class="lead">State the action and the cost. Don't sell the click. One primary, one quiet alternate, then stop.</p>
+  <div class="move">
+    <span class="tag">the rule</span>
+    <h3>Name the action. Name the cost. Stop.</h3>
+    <div class="ex"><div class="lab">DO module · the two doors</div>
+    <p><b>Run one free in two minutes.</b> &nbsp;·&nbsp; <span class="mut">Or read the standard on GitHub.</span></p>
+    <p class="mut" style="margin-top:8px;font-size:14px">No "get started today!", no "unlock", no exclamation. The CTA is a fact about what happens next.</p></div>
+  </div>
+
+  <!-- TEMPLATE -->
+  <h2 class="sec">The reusable fill-in (any page)</h2>
+  <p class="lead">Copy this block, fill the brackets, gut-check every line against <i>"is this true, or performing?"</i></p>
+  <div class="tmpl">
+<span class="b">SPINE</span>      enemy → mindset → belief → promise  (inherit from the master spine)<br/>
+<span class="b">① TELL</span>    <span class="f">[hero one-liner — promise + enemy, ≤8 words]</span><br/>
+          <span class="f">[30s: name the enemy · meet the mindset · state the promise · the no-model line]</span><br/>
+<span class="b">② SEE</span>     <span class="f">[the live demo — input in, the MOVE out. show the withheld thing.]</span><br/>
+<span class="b">③ PROVE</span>   <span class="f">[1–3 numbers or mechanisms, sourced · "no model grades model" · the honest limit]</span><br/>
+<span class="b">④ DO</span>      <span class="f">[primary action + its cost] · [quiet alternate] · stop]</span>
+  </div>
+
+  <footer>
+    <hr style="margin-bottom:22px"/>
+    The Copy Formula · awaken.fyi · Lyra Labs · v0.1 draft · pairs with Voice &amp; Tone and the Content Map<br/>
+    <span class="mono">Tell the story. Show the move. Prove it cold. Then stop.</span>
+  </footer>
+
+</div>
+</body>
+</html>
