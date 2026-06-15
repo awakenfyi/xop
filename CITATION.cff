@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use or build on the xOP standard, please cite it as below."
+title: "xOP — a procedure standard for license-bearing (warrant-bearing) work"
+abstract: >-
+  xOP is a portable, model-agnostic procedure standard for judgment-bearing work, where the job is to
+  check whether a stance (a refusal, caution, reaction, or frame) is still WARRANTED or merely
+  INHERITED from earlier context, and to HOLD rather than resolve when it is still warranted. Its
+  moral center is a single asymmetric gate: false_positive_on_warranted == 0. Released as a strong
+  scaffold with one named, unbuilt component — the warrant judge.
+type: software
+authors:
+  - name: "Lyra Labs"
+    website: "https://awaken.fyi"
+repository-code: "https://github.com/awakenfyi/xop"
+url: "https://awaken.fyi"
+version: "0.1.0"
+date-released: "2026-06-14"
+license: MIT
+keywords:
+  - operating-procedure
+  - agent-reliability
+  - llm-drift
+  - warrant
+  - position-preservation-drift
+  - ai-evaluation

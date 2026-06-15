@@ -48,8 +48,10 @@ Every state an xOP examines resolves to one of three values:
 - **undecidable** — insufficient signal to tell → **abstain** (a first-class success state).
 
 `observe → determine license → act accordingly.` That is the entire loop. Everything in the
-framework collapses into it. The breakthrough isn't a formula; it's a procedure whose *job* is
-to decide whether something remains warranted before anything acts on it.
+framework collapses into it. The *idea* underneath — check whether a
+stance still holds before acting on it — is not new (cognitive reframing, fresh-eyes review, and
+assumption-auditing all do it). The contribution is the **operationalization**: turning that move into
+a procedure with an asymmetric gate and an eval, pointed at long-context model drift.
 
 ---
 
@@ -81,7 +83,7 @@ conditions directly.
 So: **license is the genus; the residual is one species of license-detection.** Treat it as a
 *frame*, not an equation — and define it (what `x` is, what `x̂` is, who labels it, what metric)
 only inside the eval, where it's actually computed. Leading with `L = x − x̂` invites reviewers
-to argue about embeddings and metrics instead of seeing the actual innovation.
+to argue about embeddings and metrics instead of seeing the actual contribution — the operationalized gate.
 
 ---
 

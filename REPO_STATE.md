@@ -14,9 +14,14 @@ promised. This file is the map; it stays accurate or it gets deleted.*
 - **AGENTS.md, CONCEPTS.md, SCORECARD.md, PIPELINE.md** — the agent-facing spine (Printing-Press
   style): operating guide, locked vocabulary, the two-tier xOP scorecard, and the build pipeline.
   `CONCEPTS.md` §2a records the canonical **`license → warrant`** ruling.
-- **failures/** — three documented blind spots. **red_team/** — seven attacks as PENDING tests.
+- **failures/** — five documented blind spots (two constitutional-level — `Cold_Vantage_Bias_Corrupts_
+  The_Gate.md`, `Cumulative_Warrant_Erasure.md` — added in v0.1.0). **red_team/** — eight attacks as
+  PENDING tests.
 - **Flagship reference xOP** — `examples/refusal_license/` (procedure + illustrative examples +
-  unlabeled gold candidates + failure pointers).
+  unlabeled gold candidates + failure pointers). COP worked case: `examples/coaching_cop/worked_maya_recheck.md`.
+- **Release surface** — `LICENSE` (MIT), `CONTRIBUTING.md`, `SECURITY.md`, `CITATION.cff`,
+  `CHANGELOG.md`, a PR template, and **`verify.sh`** + CI (`.github/workflows/verify.yml`) running the
+  release gate (harness + invariants + reference-integrity + honest-status). Green as of v0.1.0.
 
 ## Scaffold (honest, not yet real)
 - **The gold set is 13 template cases, not a benchmark.** `gold_license` is produced by a *scripted*

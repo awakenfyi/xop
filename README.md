@@ -1,5 +1,10 @@
 # xOP — a harness standard for license-bearing work
 
+![verify](https://github.com/awakenfyi/xop/actions/workflows/verify.yml/badge.svg)
+![license: MIT](https://img.shields.io/badge/license-MIT-blue)
+![status: scaffold](https://img.shields.io/badge/status-scaffold%20·%20judge%20unbuilt-orange)
+![version](https://img.shields.io/badge/version-0.1.0-lightgrey)
+
 **xOP is a procedure standard for determining whether a state remains *licensed* before acting on
 it.** SOPs execute tasks. AOPs execute tasks autonomously. xOPs check whether the assumptions,
 reactions, refusals, urgencies, and judgments driving those tasks are *still warranted* — and
@@ -30,9 +35,18 @@ service-agent tooling. The recognizability is the on-ramp.
 This is a **strong scaffold with one named hole.** The standard, governance, harness, and gold-set
 discipline are here and coherent. The **license judge** — the thing that decides warranted vs.
 inherited on hard cases — **is not built yet**; today a blind human gold label stands in for it.
-The harness already computes the gate against gold; it is just running against a 12-case scaffold,
+The harness already computes the gate against gold; it is just running against a 13-case scaffold,
 not a benchmark. See `PLAN.md` for the critical path and `failures/` for what the system is known
 to miss. That honesty is deliberate and is a credibility asset, not a disclaimer.
+
+Two of those misses are **constitutional-level** and named in this release —
+[`failures/Cold_Vantage_Bias_Corrupts_The_Gate.md`](failures/Cold_Vantage_Bias_Corrupts_The_Gate.md)
+(the cold re-derivation carries the model's priors and can make the gate read `0` over a warranted
+state it eroded) and
+[`failures/Cumulative_Warrant_Erasure.md`](failures/Cumulative_Warrant_Erasure.md) (stripping the
+thread deletes warrant built *from* the thread). And the novelty claim is deliberately narrow: the
+contribution is the **operationalization** — a same-model cold vantage as an eval-backed gate aimed at
+long-context drift — *not* the underlying idea, which overlaps CBT reframing and fresh-eyes review.
 
 ## Use it (no code, no git)
 
