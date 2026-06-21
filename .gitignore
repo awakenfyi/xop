@@ -6,6 +6,7 @@ harness/phase1/gold.json
 __pycache__/
 *.pyc
 .DS_Store
+.claude/
 
 # Kept on disk, out of the published spine (see REPO_STATE.md).
 # v1.1/ is a stale full-repo snapshot; gem_gpt_test/ is scratch. Remove these
