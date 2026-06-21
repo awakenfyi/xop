@@ -118,6 +118,14 @@ site/                awaken.fyi content map
 archive/             Lyra/COP precursor material, kept out of the public spine
 ```
 
+## Reference implementation
+
+The Kit — seven Guards, `base.py`, `xop` CLI, 95/95 fixtures — lives at
+**[awakenfyi/xop-kit](https://github.com/awakenfyi/xop-kit)**.
+
+This repo is the Standard: the contract, catalog, harness, and governance.
+The Kit executes it. They are separate; the Standard is implementable without the Kit.
+
 ## Where to start reading
 
 - **Reviewer:** `concept/00_OVERVIEW_SOP_AOP_xOP.md` → `concept/03_REVIEWER_GUIDE.md` → `failures/`.

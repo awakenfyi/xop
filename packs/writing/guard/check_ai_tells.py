@@ -21,6 +21,10 @@ What this is and is NOT
 Badge: RULE-TESTED (vocabulary + construction tiers). Run against fixtures.jsonl.
 Rhythm tier is ADVISORY — reported, never gating, because no threshold is defensible.
 
+This is the Work Pack standalone script (Standard repo). The canonical Guard engine
+with the full `base.py` API, CLI, and all seven Work Packs lives at:
+  https://github.com/awakenfyi/xop-kit
+
 Usage:
     python check_ai_tells.py FILE.md
     cat draft.txt | python check_ai_tells.py -
