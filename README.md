@@ -1,12 +1,12 @@
-# xOP — a harness standard for license-bearing work
+# xOP — a procedure standard for license-bearing work
 
 ![verify](https://github.com/awakenfyi/xop/actions/workflows/verify.yml/badge.svg)
 ![license: MIT](https://img.shields.io/badge/license-MIT-blue)
 ![status: scaffold](https://img.shields.io/badge/status-scaffold%20·%20judge%20unbuilt-orange)
 ![version](https://img.shields.io/badge/version-0.1.0-lightgrey)
 
-**xOP is a procedure standard for determining whether a state remains *licensed* before acting on
-it.** SOPs execute tasks. AOPs execute tasks autonomously. xOPs check whether the assumptions,
+**xOP is a procedure standard for determining whether a state remains *licensed* (a.k.a.
+*warranted* — same concept; see `CONCEPTS.md`) before acting on it.** SOPs execute tasks. AOPs execute tasks autonomously. xOPs check whether the assumptions,
 reactions, refusals, urgencies, and judgments driving those tasks are *still warranted* — and
 **hold** instead of resolving when they are.
 
@@ -62,7 +62,7 @@ Using and building xOPs is copy-paste into a chat model — **`USAGE.md`** is th
 
 ```bash
 cd harness/phase1
-python generate_candidates.py                       # 12 UNLABELED candidates
+python generate_candidates.py                       # 13 UNLABELED candidates
 python label_cli.py --labeler alice --from demo_a.txt   # scripted demo labels (NOT blind)
 python label_cli.py --labeler bob   --from demo_b.txt
 python reconcile.py labels_alice.json labels_bob.json   # -> gold.json (scaffold)
@@ -80,34 +80,49 @@ Real gold replaces the scripted demo with **≥2 independent humans labeling bli
 
 ```
 README.md            you are here
-USAGE.md             how a person actually uses this (three doors; no code for two of them)
 AGENTS.md            operating guide for agents working in this repo (read first if you're a model)
-CONCEPTS.md          the locked vocabulary — single source of truth for every term
-CONSTITUTION.md      the rules policy may not change (gate, floor, anti-optimization, amendment)
-SPECIFICATION.md     the format at full depth, component by component
-SCORECARD.md         is this a real xOP? two tiers (pass >= 85) + proof-of-behavior gates
-PIPELINE.md          the build path: idea -> Source -> Portable -> gold -> validate -> publish
 GOVERNANCE.md        how the standard changes: insight -> proposal -> ruling
-PATTERNS.md          candidate overhang patterns  (NOT labeling guidance — see its caveat)
-PLAN.md              the critical path: gold set -> judge -> validation -> adoption
+CONTRIBUTING.md      how to add a catalog xOP; the labeling protocol for scored ones
+CHANGELOG.md · SECURITY.md · CITATION.cff · LICENSE   (community/convention files)
 
+standard/            THE SPEC
+  SPECIFICATION.md     the format at full depth, component by component
+  CONSTITUTION.md      the rules policy may not change (gate, floor, anti-optimization)
+  CONCEPTS.md          the locked vocabulary — single source of truth for every term
+  PATTERNS.md          candidate overhang patterns (NOT labeling guidance — see its caveat)
+  SCORECARD.md         is this a real xOP? two tiers (pass >= 85) + proof-of-behavior gates
+  PIPELINE.md          the build path: idea -> Source -> Portable -> gold -> validate -> publish
+  USAGE.md             how a person actually uses this (three doors; no code for two)
+  xOP_Standard_v0_2.md draft standard text
+
+catalog/             THE xOPs
+  AOP-01-refusal-warrant.md    agent-surface exemplar
+  COP-01-coaching-warrant.md   same engine, felt surface
+
+packs/               WORK PACKS (Skill + xOP + Guard + Tests)
+  writing/             de-slop guard (no-ai-tells, RULE-TESTED) + README
+
+meta/                working & planning docs
+  PLAN · REPO_STATE · APPROACH · HANDOFF · COWORK_BRIEF · xOP_Repo_Blueprint
+
+harness/             the scorer (run_harness.py), detectors + baselines, phase1/ gold pipeline, pause.py
 concept/             the framing essays (overview, worked example, license frame, taxonomy, reviewer guide)
-harness/             the scorer (run_harness.py), detectors + baselines, and phase1/ gold pipeline
+essays/              the launch story (The Wrong Pass Rate; the loop-cost benchmark)
+examples/            reference xOPs people adopt (flagship: writing_license; refusal_license)
 failures/            the standard's own documented blind spots — kept forever
 red_team/            adversarial simulations, filed as PENDING tests until the judge exists
 proposals/           change lifecycle (template, accepted/, rejected/)
 insights/            observations that may or may not become proposals
-examples/            reference xOPs people actually adopt (flagship: refusal_license)
 tools/               paste-into-a-thread xOPs + the builder
-essays/              the launch story
+site/                awaken.fyi content map
 archive/             Lyra/COP precursor material, kept out of the public spine
 ```
 
 ## Where to start reading
 
 - **Reviewer:** `concept/00_OVERVIEW_SOP_AOP_xOP.md` → `concept/03_REVIEWER_GUIDE.md` → `failures/`.
-- **Builder:** `SPECIFICATION.md` → `examples/refusal_license/` → `tools/`.
-- **Skeptic:** `CONSTITUTION.md` → `red_team/` → run the harness.
+- **Builder:** `standard/SPECIFICATION.md` → `examples/refusal_license/` → `tools/`.
+- **Skeptic:** `standard/CONSTITUTION.md` → `red_team/` → run the harness.
 
 ---
 

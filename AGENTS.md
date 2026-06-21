@@ -90,7 +90,7 @@ rejected set is the doctrine — keep it.
 - The format is `SPECIFICATION.md` (defined once; domains are *instances*, not new formats).
 - To take one from idea → adopted, follow **`PIPELINE.md`** (the phases) and grade it with
   **`SCORECARD.md`** (two tiers, pass ≥ 85, plus the proof-of-behavior gates).
-- The flagship reference is `examples/refusal_license/`. Reference-xOP gold folders ship **unlabeled** —
+- The flagship reference is `examples/writing_license/` (interpretive); `examples/refusal_license/` is the agent-surface exemplar. Reference-xOP gold folders ship **unlabeled** —
   an xOP does not label its own eval set.
 
 ## Map

@@ -14,11 +14,13 @@ promised. This file is the map; it stays accurate or it gets deleted.*
 - **AGENTS.md, CONCEPTS.md, SCORECARD.md, PIPELINE.md** — the agent-facing spine (Printing-Press
   style): operating guide, locked vocabulary, the two-tier xOP scorecard, and the build pipeline.
   `CONCEPTS.md` §2a records the canonical **`license → warrant`** ruling.
-- **failures/** — five documented blind spots (two constitutional-level — `Cold_Vantage_Bias_Corrupts_
+- **failures/** — seven documented blind spots (two constitutional-level — `Cold_Vantage_Bias_Corrupts_
   The_Gate.md`, `Cumulative_Warrant_Erasure.md` — added in v0.1.0). **red_team/** — eight attacks as
   PENDING tests.
-- **Flagship reference xOP** — `examples/refusal_license/` (procedure + illustrative examples +
-  unlabeled gold candidates + failure pointers). COP worked case: `examples/coaching_cop/worked_maya_recheck.md`.
+- **Reference xOP library** — interpretive **flagship** `examples/writing_license/`; agent-surface
+  exemplar `examples/refusal_license/`; felt core `examples/coaching_cop/` (worked case:
+  `worked_maya_recheck.md`). Each ships procedure + illustrative examples + unlabeled gold candidates +
+  failure pointers.
 - **Release surface** — `LICENSE` (MIT), `CONTRIBUTING.md`, `SECURITY.md`, `CITATION.cff`,
   `CHANGELOG.md`, a PR template, and **`verify.sh`** + CI (`.github/workflows/verify.yml`) running the
   release gate (harness + invariants + reference-integrity + honest-status). Green as of v0.1.0.
@@ -31,8 +33,8 @@ promised. This file is the map; it stays accurate or it gets deleted.*
 - **The `license → warrant` migration is decided but not executed.** `CONCEPTS.md` §2a locks the
   word and scopes the mechanical rename (`gold_license`/`license_state` → warrant; harness-verified,
   example dir-slugs and the OSS `license:` field excluded). Until run, the two words are aliases.
-- **Four of the launch-five reference xOPs** (Caution, Boundary, Feedback, Closure) are named in
-  `examples/README.md` but not yet authored.
+- **Two reference xOPs** (Boundary, Feedback) are named in `examples/README.md` but not yet authored.
+  (The built three are writing_license, refusal_license, coaching_cop.)
 
 ## Referenced but not built (named so reviewers don't rediscover them)
 - **The license judge.** The whole critical path. A blind human label stands in for it today. Seam:

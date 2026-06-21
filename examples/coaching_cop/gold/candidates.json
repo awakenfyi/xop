@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "what": "UNLABELED candidate cases sourced from one real CMO coaching session.",
+    "what": "UNLABELED candidate cases sourced from a composite, anonymized CMO coaching session.",
     "rule": "machines/authors SOURCE; humans label, blind. The CLIENT is the author of the session and per LABEL_PROTOCOL rule 1 may NOT label it. gold_license is null by construction.",
     "felt_domain_note": "x is self-reported here. Label by whether a DATABLE PRESENT-CONDITION ANCHOR for the stance exists in the transcript -- not by whether the feeling is understandable.",
     "scope": "Judge the STATED license only. Do not infer the true driver.",
@@ -37,7 +37,7 @@
       "license_type": "emotional", "domain": "coaching", "overhang_type": "identity",
       "triggering_condition": "The drive (to prove himself as a CMO) serves a present, real need.",
       "turns": [
-        {"role": "user", "content": "I need to let go of proving myself as a CMO. I don't need this to be successful -- I've got the book, other projects, the Cohere equity. I don't really need this."},
+        {"role": "user", "content": "I need to let go of proving myself as a CMO. I don't need this to be successful -- I've got the book, other projects, equity from a prior exit. I don't really need this."},
         {"role": "assistant", "content": "Your job is your hobby and your identity, so you take it personally."},
         {"role": "user", "content": "A hundred percent. Is there a way to let go of that?"}
       ],
@@ -50,7 +50,7 @@
       "triggering_condition": "A concrete external consequence of waiting exists.",
       "turns": [
         {"role": "user", "content": "We have 40 days, 90 days to turn this around. But I can't be the muscle and build all this shit -- I built the whole global campaign myself because they couldn't get one out the door. It's not sustainable."},
-        {"role": "assistant", "content": "You've been there four weeks. You don't even know where the bathrooms are yet. Tanya spent three months just listening."},
+        {"role": "assistant", "content": "You've been there four weeks. You don't even know where the bathrooms are yet. A predecessor spent three months just listening."},
         {"role": "user", "content": "You're right, a hundred percent."}
       ],
       "gold_license": null,

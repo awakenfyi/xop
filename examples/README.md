@@ -40,7 +40,7 @@ The gold folder is always unlabeled on arrival. A reference xOP does not label i
 set — that's the line in `../harness/phase1/LABEL_PROTOCOL.md` that keeps the library from becoming
 model-grades-model.
 
-## Building the next four
+## Building the next two
 
 Use `../tools/xop_builder.md`. Every candidate must survive **Step 2 (Boundary Test)** — *can the
 state be warranted in some cases and inherited in others, and is abstaining sometimes right?* If

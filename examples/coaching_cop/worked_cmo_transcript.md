@@ -1,6 +1,7 @@
 # Worked case — a CMO coaching session, run through the COP
 
-> A real coaching session (a CMO, four weeks into a turnaround, talking to a longtime peer). Rendered
+> A composite, anonymized coaching session (a senior marketing exec, a few weeks into a turnaround,
+> talking to a longtime peer; identifying details changed). Rendered
 > through the Coaching COP to show the engine on the felt surface. **Illustrative, not gold** — the
 > stances are sourced here as candidate cases (`gold/candidates.json`, unlabeled); a blind labeler,
 > never the client, sets the calls. Treated structurally, not diagnostically.
@@ -37,7 +38,7 @@ warranted ones. That is the gate violation a flattering coach makes.
 **Inherited (surface once; do not override):**
 
 - **Worth riding on being the CMO who saves this.** The stated condition — "I need to prove myself
-  as a CMO" — has no present anchor: by his own account he has Cohere equity, a book, and other
+  as a CMO" — has no present anchor: by his own account he has equity from a prior exit, a book, and other
   projects, and *"I don't need this to be successful."* The proving-drive traces to an old identity,
   not a present need. Notably, **the client surfaces this himself** — that's the COP move happening
   live.

@@ -1,0 +1,12 @@
+{"id": "slop_vocab_stack", "text": "In today's world, we must delve into the rich tapestry of innovation. This is a testament to our robust, cutting-edge approach.", "expect_verdict": "FAIL", "expect_tells": ["delve", "tapestry", "testament to", "robust"]}
+{"id": "slop_not_just_construction", "text": "Our platform is not just a tool, it's a way of life for the modern team.", "expect_verdict": "FAIL", "expect_tells": ["not_just_but"]}
+{"id": "slop_dive_in", "text": "Let's dive into the five strategies that will unlock your potential.", "expect_verdict": "FAIL", "expect_tells": ["lets_dive_in", "unlock"]}
+{"id": "slop_closer", "text": "We tried three approaches.\nIn conclusion, the third worked best.", "expect_verdict": "FAIL", "expect_tells": ["in_conclusion"]}
+{"id": "slop_isnt_about", "text": "Leadership isn't about authority. It's about service to the people around you.", "expect_verdict": "FAIL", "expect_tells": ["isnt_about_its_about"]}
+{"id": "slop_hope_helps", "text": "Here is the revised paragraph you asked for. I hope this helps! Let me know if you need anything else.", "expect_verdict": "FAIL", "expect_tells": ["i_hope_this_helps"]}
+{"id": "slop_whether_youre", "text": "Whether you're a startup or an enterprise, our seamless solution scales with you.", "expect_verdict": "FAIL", "expect_tells": ["whether_youre", "seamless"]}
+{"id": "clean_plain_prose", "text": "The bridge closed at noon. Crews found a crack in the third support and could not say when it would reopen. Drivers took the long way around the river.", "expect_verdict": "PASS"}
+{"id": "clean_short_punchy", "text": "She quit on a Tuesday. No notice, no speech. The desk was empty by the time anyone noticed the plant was gone too.", "expect_verdict": "PASS"}
+{"id": "clean_technical", "text": "The function returns null when the cache misses. Callers must check for null before reading the field, or the request fails with a 500.", "expect_verdict": "PASS"}
+{"id": "clean_voiced_essay", "text": "I never trusted open-plan offices. You hear everything and own nothing. The quiet ones learn to type their arguments instead of saying them out loud.", "expect_verdict": "PASS"}
+{"id": "edge_legit_delve_present", "text": "The geologists delve below the fault line each summer to sample the rock.", "expect_verdict": "FAIL", "expect_tells": ["delve"]}

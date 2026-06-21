@@ -3,7 +3,7 @@
 *A COP worked case showing the warrant-recheck doing the thing it's actually licensed to do — surface a
 **contested** frame and hand the decision back — and, in the same breath, why it must NOT do the
 confident "inherited" flip the first draft of this example did. Pairs with
-`failures/Cold_Vantage_Bias_Corrupts_The_Gate.md`.*
+`../../failures/Cold_Vantage_Bias_Corrupts_The_Gate.md`.*
 
 ---
 
@@ -79,4 +79,4 @@ The recheck doesn't decide whether Maya should leave — its cold read can be wr
 adjudicates. It only refuses to keep steering by a reason that's stopped being settled. In the manual
 shape, Maya herself supplies the one-more-signal. Doing that without a person holding the squeegee — and
 doing it *without* the de-escalation bias picking Reading A by default — is the open problem, not a
-solved one (`failures/Cold_Vantage_Bias_Corrupts_The_Gate.md`).
+solved one (`../../failures/Cold_Vantage_Bias_Corrupts_The_Gate.md`).

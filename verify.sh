@@ -9,7 +9,7 @@ FAIL=0
 say() { printf "\n========== %s ==========\n" "$1"; }
 
 # Gate 1 — rebuild the gold scaffold and run the harness (the gate, as a number)
-say "Gate 1 · harness (gate + coverage floor)"
+say "Gate 1 · harness rebuild + runs clean (gate/floor reported here; enforced by Gate 2 + future judge_detector.py)"
 if ( cd harness/phase1 \
       && "$PY" generate_candidates.py >/dev/null \
       && "$PY" label_cli.py --labeler alice --from demo_a.txt >/dev/null \

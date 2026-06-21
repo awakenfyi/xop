@@ -12,3 +12,10 @@ __pycache__/
 # lines and `git add` them if you want either in history.
 v1.1/
 gem_gpt_test/
+
+# --- pre-push quarantine (added during cleanup) ---
+# Session scratch: zips, working drafts, the TRIBE PDF. Salvage keepers, do not bulk-add.
+"XOP WEIGHTS 3.2/"
+XOP WEIGHTS 3.2/
+# Out-of-spine material kept on disk but never published (consciousness/witness construct, etc.)
+_private/

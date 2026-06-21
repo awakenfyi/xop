@@ -20,7 +20,7 @@ healthcare, legal); ≥2 independent blind labelers; `gold.json` with `blind: tr
 agreement published. **Low warranted↔inherited agreement is the headline finding, not a footnote** —
 if humans can't separate them, no judge should be trusted to.
 
-Status: pipeline runs end to end; the seed pool is a 12-case scaffold, not gold.
+Status: pipeline runs end to end; the seed pool is a 13-case scaffold, not gold.
 
 ## 2. Judge  — the unbuilt component
 
