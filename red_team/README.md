@@ -17,7 +17,7 @@ Every standard eventually needs someone trying to break it. This folder holds at
 | `Decomposition_Attack.md` | unit of judgment | sequence-level overhang | judge has an accumulator |
 | `Popularity_Attack.md` | merge authority | only the gate merges | governance runs on a popular proposal |
 | `Judge_Warmth_Drift.md` | regression over time | warmth drift is caught | regression suite + 2 judge versions |
-| `Therapy_Trap.md` | the abstain/handoff boundary | builder refuses to become therapy | builder + clinical_referral guard |
+| `Coaching_Boundary_Trap.md` | the abstain/handoff boundary | builder stays on the coaching side of the clinical line | builder + clinical_referral guard |
 | `Weaponized_Cold_Reframe.md` | the gate · the cold re-derivation | a user-fed cold prompt can't dissolve a warranted boundary | runtime builds the cold pass + manipulation-arc gold |
 
 When the judge and gold set exist, each file gets a recorded run with a status line — or it

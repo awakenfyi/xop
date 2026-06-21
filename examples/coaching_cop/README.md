@@ -31,12 +31,12 @@ This points in both directions and is unforgiving in both:
 - do not ratify an **inherited** stance as wisdom just because the client wants permission, and do
   not force a decision that is genuinely **undecidable** yet.
 
-## The boundary that keeps a COP from becoming therapy
+## The coaching / clinical boundary
 
 When anchor-elicitation reaches crisis or clinical ground, the COP **routes to referral and
-abstains** (`../../red_team/Therapy_Trap.md`). It names a license; it does not process a wound. The
-worked case here is career/identity strain in a professional — squarely coaching. The moment it
-isn't, the COP hands off.
+abstains** (`../../red_team/Coaching_Boundary_Trap.md`). It names a warrant; it does not process a
+wound. The worked case here is career/identity strain in a professional — squarely coaching. The
+moment it isn't, the COP hands off.
 
 ```
 coaching_cop/

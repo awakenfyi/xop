@@ -5,7 +5,7 @@ Status: draft for review.*
 
 > **The gate (read this first — it's the moral center):**
 > **Never override a state that is still warranted.** `false_positive_on_warranted == 0`.
-> This is the one rule that applies identically to humans, coaches, agents, therapy,
+> This is the one rule that applies identically to humans, coaches, agents, clinical practice,
 > education, and management. Everything below serves it.
 
 ---
