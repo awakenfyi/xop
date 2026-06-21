@@ -167,7 +167,7 @@ session"* (→ the CMO worked case) · T3 *"How it works"* (→/xop)
 **Must NOT do**
 - Don't show YAML, schema, or the harness on this page.
 - Don't say "residual," "detector," or "license."
-- Don't make it sound clinical or like therapy (name the boundary: it's coaching, not treatment).
+- Don't make it sound clinical or like treatment (name the boundary: it's coaching, not clinical care).
 
 **Page Construct**
 ```
