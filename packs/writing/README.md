@@ -9,7 +9,7 @@ bundle come next.
 
 ```
 Skill   — how to write it           (the playbook)        → coming next
-xOP     — when to hold your voice    writing_license       → HELD (../examples/writing_license/)
+xOP     — when to hold your voice    writing_license       → DESIGNED (../examples/writing_license/)
 Guard   — exact tells to never emit  no-ai-tells           → RULE-TESTED (guard/)
 Tests   — the receipts               fixtures.jsonl        → 12/12 pass
 ```
@@ -62,4 +62,4 @@ mechanically. It does **not** say the de-slopped text reads better to a human �
   moving target it makes no promise about.
 - It does not certify text is "human-written."
 - The Guard does not exercise judgment — a flagged word can be the right word.
-- Nothing here is `SCORED`; the semantic half is `HELD` until blind human labels exist.
+- Nothing here is self-certifying — the Guard is `RULE-TESTED` (mechanical fixtures), the semantic xOP is `DESIGNED` until blind human labels exist.

@@ -1,0 +1,46 @@
+pack: leadership-os
+title: Leadership OS
+for: new managers and leaders
+status: DESIGNED        # whole pack; each xOP also tracks its own status
+result: ""              # PASS | FAIL | INCONCLUSIVE — none run yet
+promise: "Turn how you lead into a system your team and AI can follow."
+
+# Role profiles over the reusable core — NOT new standalone xOPs.
+xops:
+  - id: xop.claim.evidence-bound        # core
+    profile: status_matches_reality
+    governs: "green / at-risk / blocked / done reflect reality, not reassurance"
+  - id: xop.authority.escalation        # core
+    profile: leadership
+    governs: "keep with the owner vs. require leadership review"
+  - id: xop.decision.ledger             # core
+    profile: leadership
+    governs: "a settled decision stays settled until legitimately reopened"
+  - id: xop.interaction.advice-timing   # NEW interaction xOP (profiles: leadership/coaching/support/consulting)
+    profile: leadership
+    governs: "listen/clarify while they explore; act when they ask"
+  - id: xop.action.authorization        # core
+    profile: decision_rights
+    governs: "recommend / decide / approve / execute are distinct"
+  - id: xop.verify.completion           # core
+    profile: commitments
+    governs: "a commitment is complete only with owner, date, acceptance evidence, observed state"
+
+skills:                 # methods (how), authored separately — DESIGNED
+  - one-on-ones
+  - executive-updates
+  - feedback
+  - decision-memos
+
+guards:                 # mechanical checks (deterministic)
+  - decision-appears-early
+  - owner-and-date-required
+  - length-limits
+  - communication-house-style
+
+tests: tests/scenarios.jsonl
+
+# Router: apply 1 primary + at most 2 supporting xOPs per task.
+boundary: >
+  Structures evidence and escalation only. Never automates final judgments about a person's worth,
+  personality, future, or employment. Sensitive HR/legal/clinical/crisis -> qualified human review.

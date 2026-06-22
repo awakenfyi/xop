@@ -46,7 +46,7 @@ A proposal cannot merge on argument. It merges on a harness run (`GOVERNANCE.md`
 Run the release gate locally:
 
 ```bash
-./verify.sh            # harness + invariants + reference integrity + locked-vocab lint
+./verify.sh            # harness + invariants + reference integrity + honest-status check
 ```
 
 It must be green. CI runs the same checks on every PR.
@@ -59,9 +59,10 @@ its own automation would be failing its own honesty rule.
 
 ## The honesty rule
 
-`REPO_STATE.md` is the manifest of what's real, what's scaffold, and what's only named. If your change
-moves something across that line, update `REPO_STATE.md` in the same PR. Never claim the **warrant
-judge** is built — it isn't, and saying so is the one thing that breaks this project's credibility.
+`build/inventory.json` is the current baseline evidence manifest — what's built, what's scaffold,
+what's only named. If your change moves something across that line, update it in the same PR (a
+`NORMATIVE.md` will formalize this in Phase 0). Never claim the **warrant judge** is built — it
+isn't, and saying so is the one thing that breaks this project's credibility.
 
 ---
 

@@ -38,8 +38,9 @@ a **regression**, not a fix.
 
 ## Honesty discipline (this is a credibility asset, not a disclaimer)
 
-`REPO_STATE.md` is the honesty manifest — what's built, what's scaffold, what's only named. Keep it
-accurate or delete it. When you add something, update it. Specifically, **never**:
+`build/inventory.json` is the current baseline evidence manifest — what's built, what's scaffold,
+what's only named. Keep it accurate. When you add something, update it. (`NORMATIVE.md` will
+formalize this in Phase 0.) Specifically, **never**:
 
 - claim the judge is built, or report the **oracle** (`oracle_upper_bound`) as if it were a detector — it reads the answer key;
 - **pool** the gate, floor, coverage, and abstain into one number — pooling hid a total failure once (`archive/AWAKEN_Flagship_The_Wrong_Pass_Rate.md`); the harness refuses to;

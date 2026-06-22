@@ -4,6 +4,30 @@ All notable changes to the xOP standard are recorded here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); this project is pre-1.0 and versions are pinned so
 xOPs can be regression-tested across model upgrades.
 
+## [Unreleased] — PR 0 cleanup (2026-06-21)
+
+### Fixed
+- `catalog/AOP-02-evidence-caution.SCORED.md` → renamed to `AOP-02-evidence-caution.md` (status never
+  in filenames; badge updated to `DESIGNED` throughout the file).
+- `standard/_TEMPLATE.md`, `packs/README.md`, `packs/writing/README.md`,
+  `packs/writing/guard/no-ai-tells.guard.md` — old `SCORED / HELD` badge language replaced with
+  evidence ladder (`DESIGNED → RULE-TESTED → HUMAN-EVALUATED`).
+- `verify.sh` Gate 4 — now skips absolute-path links (site routes `/cop`, `/xop`, etc.) and `meta/`
+  directory, preventing false positives from non-file references.
+- `README.md` — removed two hyperlinks to future directories (`skills/xop-author/`, `catalog/profiles/`)
+  that don't exist yet; replaced with plain-text notes pointing to where they'll land.
+- `CITATION.cff` — title: "license-bearing (warrant-bearing)" → "warrant-bearing" (old terminology).
+- `CONTRIBUTING.md` — `REPO_STATE.md` reference updated to `build/inventory.json`; verify.sh
+  description corrected from "locked-vocab lint" to "honest-status check".
+- `AGENTS.md` — `REPO_STATE.md` reference updated to `build/inventory.json`.
+
+### Changed
+- `meta/` added to `.gitignore` and removed from git index (files remain on disk). Internal
+  scaffolding is not part of the public standard per the build brief.
+- `build/` added to `.gitignore`. Inventory artifacts are generated, not normative.
+
+---
+
 ## [0.1.0] — 2026-06-14
 
 First public-grade release. A **strong scaffold with one named hole** (the warrant judge), released

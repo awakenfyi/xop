@@ -17,7 +17,7 @@ purpose — and that is exactly why it ships now while the xOPs wait on the pilo
 | Question | Is a banned tell present? | Is *this* choice warranted by the piece? |
 | Answer | PASS / FAIL, mechanical | hold / surface / abstain, judgment |
 | Needs pilot? | No — deterministic | Yes — blind human labels |
-| Badge | `RULE-TESTED` | `HELD` → `HUMAN-EVALUATED` |
+| Badge | `RULE-TESTED` | `DESIGNED` → `HUMAN-EVALUATED` |
 
 ## What it fixes
 

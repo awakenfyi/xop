@@ -87,7 +87,10 @@ These tools exist but operate independently. There is no contract connecting a V
 
 The contribution is not "we invented linting for prose." The contribution is: **a portable contract that connects cheap findings to contextual judgment, abstention, remediation, and release control.** That contract is *specified*; one Guard of it is *built*.
 
-For the full loop architecture and stop hook integration, see the xOP Kit: [awakenfyi/xop-kit](https://github.com/awakenfyi/xop-kit).
+For the full loop architecture (and the honest status of each layer), see
+[xOPs-Missing-Harness-Primitive.md](xOPs-Missing-Harness-Primitive.md); for the reference
+implementation and stop-hook integration, the xOP Kit: [awakenfyi/xop-kit](https://github.com/awakenfyi/xop-kit).
+A runnable slice of the deterministic layer is `packs/writing/loop_demo.py`.
 
 ---
 

@@ -44,7 +44,7 @@ MISS="$("$PY" - <<'PYEOF'
 import os, re, glob
 root = os.getcwd()
 miss = []
-skip = ("v1.1/", "gem_gpt_test/", ".git/")
+skip = ("v1.1/", "gem_gpt_test/", ".git/", "meta/")
 link = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 for md in glob.glob("**/*.md", recursive=True):
     if any(md.startswith(s) or ("/"+s) in ("/"+md) for s in skip):
@@ -56,7 +56,7 @@ for md in glob.glob("**/*.md", recursive=True):
         continue
     for tgt in link.findall(text):
         t = tgt.strip()
-        if t.startswith(("http://", "https://", "mailto:", "#")):
+        if t.startswith(("http://", "https://", "mailto:", "#", "/")):
             continue
         t = t.split("#")[0].strip()
         if not t:

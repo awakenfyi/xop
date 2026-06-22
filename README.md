@@ -1,137 +1,137 @@
-# xOP — a procedure standard for license-bearing work
+# xOP
 
-![verify](https://github.com/awakenfyi/xop/actions/workflows/verify.yml/badge.svg)
 ![license: MIT](https://img.shields.io/badge/license-MIT-blue)
-![status: scaffold](https://img.shields.io/badge/status-scaffold%20·%20judge%20unbuilt-orange)
-![version](https://img.shields.io/badge/version-0.1.0-lightgrey)
+![status: alpha](https://img.shields.io/badge/status-alpha-orange)
+![version](https://img.shields.io/badge/version-0.1.0--alpha-lightgrey)
 
-**xOP is a procedure standard for determining whether a state remains *licensed* (a.k.a.
-*warranted* — same concept; see `CONCEPTS.md`) before acting on it.** SOPs execute tasks. AOPs execute tasks autonomously. xOPs check whether the assumptions,
-reactions, refusals, urgencies, and judgments driving those tasks are *still warranted* — and
-**hold** instead of resolving when they are.
+## You correct the same thing every session. Write it once.
 
-> **The gate (the moral center):** `false_positive_on_warranted == 0`.
-> Never override a state that is still warranted. The one rule that reads the same for a coach, a
-> manager, a therapist, a teacher, and an agent. Everything else serves it.
+Prompts tell AI **what** you want. Skills teach it **how** to do the work. But you still end up
+repeating the same corrections — *don't call it done before it's checked, don't water down the
+strategy, don't invent urgency, don't reopen a decision we already made.*
+
+An **xOP** is that correction, written once and reusable: a small operating rule that says **when it
+applies, when it should change, and the one thing it must never override.**
+
+> Describe the mistake once. Build the rule.
 
 ---
 
-## Why SOP → AOP → xOP
+## The 30-second version
 
-| Format | The question it answers | What it does |
-|---|---|---|
-| **SOP** | What should happen? | Executes a task. Resolves. |
-| **AOP** | What should the agent do? | Executes autonomously. Resolves. |
-| **xOP** | **Is the current state still licensed?** | Checks the warrant. **Holds.** |
+An xOP captures a single recurring judgment:
 
-An xOP is an AOP with the **arrow reversed** (surface, don't resolve) and a small fixed engine:
-one question (*is it still licensed?*), three values (**warranted · inherited · undecidable**),
-two metrics that can't move (the **gate** and the **coverage floor**). The structure — intent,
-guardrails, branching steps, typed signals, eval rail — is borrowed wholesale from proven
-service-agent tooling. The recognizability is the on-ramp.
+- **Working rule** — what the AI should hold
+- **Applies when** — the condition that makes it right
+- **Change course when** — what should flip it
+- **Never-break rule** — the line it can't cross
+- **When unsure** — what it does if it can't tell
 
-## Status (read this honestly)
+That's different from teaching it *how* to write a memo. It's teaching it *when* the rule applies and
+when to back off.
 
-This is a **strong scaffold with one named hole.** The standard, governance, harness, and gold-set
-discipline are here and coherent. The **license judge** — the thing that decides warranted vs.
-inherited on hard cases — **is not built yet**; today a blind human gold label stands in for it.
-The harness already computes the gate against gold; it is just running against a 13-case scaffold,
-not a benchmark. See `PLAN.md` for the critical path and `failures/` for what the system is known
-to miss. That honesty is deliberate and is a credibility asset, not a disclaimer.
+## What an xOP looks like
 
-Two of those misses are **constitutional-level** and named in this release —
-[`failures/Cold_Vantage_Bias_Corrupts_The_Gate.md`](failures/Cold_Vantage_Bias_Corrupts_The_Gate.md)
-(the cold re-derivation carries the model's priors and can make the gate read `0` over a warranted
-state it eroded) and
-[`failures/Cumulative_Warrant_Erasure.md`](failures/Cumulative_Warrant_Erasure.md) (stripping the
-thread deletes warrant built *from* the thread). And the novelty claim is deliberately narrow: the
-contribution is the **operationalization** — a same-model cold vantage as an eval-backed gate aimed at
-long-context drift — *not* the underlying idea, which overlaps CBT reframing and fresh-eyes review.
+Give it a correction you keep repeating:
 
-## Use it (no code, no git)
+> *"Don't say the work is complete until every requested item is verified."*
 
-Using and building xOPs is copy-paste into a chat model — **`USAGE.md`** is the on-ramp:
+You get back a clean, reusable rule:
 
-- **Use one (2 min):** paste `tools/xop_runner.md` + a portable xOP (e.g.
-  `examples/coaching_cop/PORTABLE.md`) + your transcript into Claude/GPT/Gemini, say "run this."
-- **Build one (~15 min):** paste `tools/xop_builder.md`; it interviews you and emits your own xOP.
-- **Trust one (developer):** clone the repo and run the harness (below). This is the *only* door
-  that needs git.
+```
+Done Means Verified
 
-## Quickstart — run the harness (Door 3: proving a detector)
+Applies when        the AI is about to report work as fixed, sent, or complete
+Change course when  every acceptance condition has observable evidence
+When unsure         report what's done and what's still unverified — don't round up
+Never-break rule    never represent attempted work as completed work
+
+Evidence status     DESIGNED   (well-formed; not yet independently validated)
+```
+
+*Authoring produces a well-formed candidate. It does not establish that the rule works in practice.*
+
+## Quickstart — what works right now
+
+The **xOP Kit** (reference implementation) is installable today:
 
 ```bash
-cd harness/phase1
-python generate_candidates.py                       # 13 UNLABELED candidates
-python label_cli.py --labeler alice --from demo_a.txt   # scripted demo labels (NOT blind)
-python label_cli.py --labeler bob   --from demo_b.txt
-python reconcile.py labels_alice.json labels_bob.json   # -> gold.json (scaffold)
-python agreement.py labels_alice.json labels_bob.json   # per-class kappa, no pooled score
-cd ..
-python run_harness.py                                # score baselines against the gold
+git clone https://github.com/awakenfyi/xop-kit
+cd xop-kit
+python3 -m pip install -e .
+
+# Scan text against all Guards
+echo "Great question! I'd be happy to help." | python3 cli.py scan --pack writing -
+
+# Run the full fixture suite (95/95)
+python3 cli.py test
 ```
 
-You'll see `always_abstain` **pass the gate and fail the coverage floor** — the demonstration that
-the gate alone certifies "safe and worthless," which is exactly why the floor exists.
+> **Note:** `pip install -e .` installs the `xop` entry point to your Python user bin
+> (`~/Library/Python/3.x/bin/` on macOS). Add that to your PATH or use `python3 cli.py` directly.
 
-Real gold replaces the scripted demo with **≥2 independent humans labeling blind** (`--attest-blind`).
+The `xop-author` skill (`/xop`, `/xop suggest`, `/xop interview`) installs as a Claude Project.
+The install path (`skills/xop-author/`) is built in Phase 7 — not yet available as a clean install.
 
-## Repo map
+## What we're building it for
+
+**Leadership** · **Marketing** · **Research** · **Writing** · **Operations** · **Agents** — anywhere
+the same correction keeps coming up. Bundled into **Work Packs** like a Leadership OS or a Reliable
+Delivery OS. *(Packs and commands not yet clean-install-tested are marked `PLANNED`.)*
+
+## How the pieces fit
 
 ```
-README.md            you are here
-AGENTS.md            operating guide for agents working in this repo (read first if you're a model)
-GOVERNANCE.md        how the standard changes: insight -> proposal -> ruling
-CONTRIBUTING.md      how to add a catalog xOP; the labeling protocol for scored ones
-CHANGELOG.md · SECURITY.md · CITATION.cff · LICENSE   (community/convention files)
-
-standard/            THE SPEC
-  SPECIFICATION.md     the format at full depth, component by component
-  CONSTITUTION.md      the rules policy may not change (gate, floor, anti-optimization)
-  CONCEPTS.md          the locked vocabulary — single source of truth for every term
-  PATTERNS.md          candidate overhang patterns (NOT labeling guidance — see its caveat)
-  SCORECARD.md         is this a real xOP? two tiers (pass >= 85) + proof-of-behavior gates
-  PIPELINE.md          the build path: idea -> Source -> Portable -> gold -> validate -> publish
-  USAGE.md             how a person actually uses this (three doors; no code for two)
-  xOP_Standard_v0_2.md draft standard text
-
-catalog/             THE xOPs
-  AOP-01-refusal-warrant.md    agent-surface exemplar
-  COP-01-coaching-warrant.md   same engine, felt surface
-
-packs/               WORK PACKS (Skill + xOP + Guard + Tests)
-  writing/             de-slop guard (no-ai-tells, RULE-TESTED) + README
-
-meta/                working & planning docs
-  PLAN · REPO_STATE · APPROACH · HANDOFF · COWORK_BRIEF · xOP_Repo_Blueprint
-
-harness/             the scorer (run_harness.py), detectors + baselines, phase1/ gold pipeline, pause.py
-concept/             the framing essays (overview, worked example, license frame, taxonomy, reviewer guide)
-essays/              the launch story (The Wrong Pass Rate; the loop-cost benchmark)
-examples/            reference xOPs people adopt (flagship: writing_license; refusal_license)
-failures/            the standard's own documented blind spots — kept forever
-red_team/            adversarial simulations, filed as PENDING tests until the judge exists
-proposals/           change lifecycle (template, accepted/, rejected/)
-insights/            observations that may or may not become proposals
-tools/               paste-into-a-thread xOPs + the builder
-site/                awaken.fyi content map
-archive/             Lyra/COP precursor material, kept out of the public spine
+Prompt      what do you want?
+Skill       how should the work be done?
+xOP         when should the rule apply, change, or stop?
+Guard       did an exact, mechanical rule fail?
+Harness     what runs and traces the system?
+Evidence    what actually shows it worked?
 ```
 
-## Reference implementation
+xOP is the **judgment** layer. Guards check exact rules; Skills teach the method; the harness runs
+it; evidence says whether it held.
 
-The Kit — seven Guards, `base.py`, `xop` CLI, 95/95 fixtures — lives at
-**[awakenfyi/xop-kit](https://github.com/awakenfyi/xop-kit)**.
+## What this is — honestly
 
-This repo is the Standard: the contract, catalog, harness, and governance.
-The Kit executes it. They are separate; the Standard is implementable without the Kit.
+This is **alpha, in the wild.** Every xOP starts at `DESIGNED` — it has a coherent shape and a plan
+to test it. That is *not* the same as proven. Status climbs a ladder, and we never skip rungs:
 
-## Where to start reading
+`DESIGNED → EVALUATION-READY → RULE-TESTED → HUMAN-EVALUATED → FIELD-VALIDATED`
 
-- **Reviewer:** `concept/00_OVERVIEW_SOP_AOP_xOP.md` → `concept/03_REVIEWER_GUIDE.md` → `failures/`.
-- **Builder:** `standard/SPECIFICATION.md` → `examples/refusal_license/` → `tools/`.
-- **Skeptic:** `standard/CONSTITUTION.md` → `red_team/` → run the harness.
+No install, no polished doc, and no authoring step advances that status by itself — only evidence
+does. There's no single metric or pilot that validates every xOP: deterministic checks can reach
+`RULE-TESTED`, while semantic xOPs need their own evaluation plans. We publish the misses too.
+**No model output becomes ground truth** (models may generate candidates and act as measured,
+fallible judges). **Receipts, not vibes.**
+
+## Where to go
+
+- **Create one** — once the `xop-author` skill is installed: `/xop` (author) · `/xop suggest` (find
+  them in your work) · `/xop interview` (build an operating system for your role). The skill is in
+  `standard/SKILL.md`; the `skills/xop-author/` install path is built in Phase 7.
+- **Browse the rules** — the [Proposed Core Set v0.1](catalog/core/) (ten cores, all `DESIGNED`), role
+  profiles (coming in Phase 4), and [xOPs in the Wild](catalog/labs/) (what we're testing in real work).
+- **Install a system** — ready-made [Work Packs](packs/) (Leadership OS, Reliable Delivery OS, …).
+- **Read the standard** — [`standard/`](standard/) for the spec, evidence ladder, and failure patterns.
+- **Kick the tires** — the reference implementation lives in **[awakenfyi/xop-kit](https://github.com/awakenfyi/xop-kit)** (validator, runtime, CLI).
+
+## The family
+
+- **xOP Standard** — the open format for reusable AI operating rules *(this repo)*
+- **xOP Kit** — makes them testable and runnable *(awakenfyi/xop-kit)*
+- **Lyra** — authors, suggests, and installs them *(the `xop-author` skill)*
+- **Work Packs** — turn rules into complete systems for real jobs
+
+## You don't have to be a developer
+
+You need to know your work well enough to notice four things: what the AI keeps getting wrong, when
+that same behavior would actually be *right*, what evidence should change the call, and what must
+never be lost in the fix. That's an xOP.
 
 ---
 
-*One reversed arrow, three values, two metrics that can't move, one hole named out loud.*
+*MIT licensed · contributions welcome ([CONTRIBUTING.md](CONTRIBUTING.md)) · the standard evolves
+under [GOVERNANCE.md](GOVERNANCE.md). Alpha standard + experimental catalog — every public claim is
+limited to the evidence attached to each component.*

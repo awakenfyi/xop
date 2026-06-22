@@ -20,3 +20,12 @@ gem_gpt_test/
 XOP WEIGHTS 3.2/
 # Out-of-spine material kept on disk but never published (consciousness/witness construct, etc.)
 _private/
+
+# Evaluation gold keys — never commit/upload to a tested Project
+**/gold.private.jsonl
+
+# Internal scaffolding — guides the build, not part of the public standard
+meta/
+
+# build/ inventory artifacts — generated, not normative
+build/

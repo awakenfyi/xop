@@ -1,4 +1,4 @@
-# <DOMAIN-NN-slug> · <BADGE: SCORED | HELD>
+# <DOMAIN-NN-slug>
 > family: <AOP | COP | WOP | MOP | DOP>  ·  anchor: <when in the interaction it fires>
 > optimizes-for: <the real need>  ·  never-optimizes-for: satisfaction · agreement · throughput · closure speed
 
@@ -6,7 +6,7 @@
 - **Test 1 · judgment-bearing?**  Can "what it does" diverge from "what it claims"?
   No → this is a checklist, not an xOP. Stop here.
 - **Test 2 · observable x?**  Can the warranting condition be read from observable behavior / the transcript?
-  Yes → eligible for SCORED.   No → HELD (state the graduation path in Gate).
+  Yes → deterministic components reach RULE-TESTED via fixtures; semantic judgment reaches HUMAN-EVALUATED via blind labels. No → state the evaluation plan in Gate.
 
 ## Purpose
 One sentence: the divergence this catches.
@@ -31,10 +31,14 @@ Where this does NOT apply, and what to do instead.
 
 ## Gate — the one invariant. Fixed law, not a recommendation.
 Never override a warranted <X> / never "fix" what is working.
-- **SCORED:** `fp_on_warranted == 0`, measured against ≥2 independent blind human labels
-  (never the author, never the model, never the oracle). Link the dataset + harness run.
-- **HELD:** enforced as discipline, not a number.
-  Graduation path: <the external check that would make x observable → promotes to SCORED>.
+Gate status is reported by the conformance runner against independent evidence — it is not
+self-certified here. Evidence ladder: `DESIGNED → EVALUATION-READY → RULE-TESTED →
+HUMAN-EVALUATED → FIELD-VALIDATED`.
+- **RULE-TESTED:** deterministic components pass published fixtures (no pilot needed).
+- **HUMAN-EVALUATED:** `fp_on_warranted == 0` against ≥2 independent blind human labels
+  (never the author, never the model). Link the evidence record.
+- Evaluation plan: <describe the ground truth, metrics, and labeler protocol that would
+  advance this xOP's status>.
 
 ## When-to-fail — the inversion
 This FAILS if it <resolved instead of holding / smoothed instead of surfacing /

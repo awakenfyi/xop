@@ -8,7 +8,7 @@ packs/<name>/
 │   ├── check_<name>.py
 │   └── fixtures.jsonl
 ├── xop/            # warrant spec (SCORED / HELD)
-│   └── <name>.md
+│   └── <name>.md          # DESIGNED → ... → HUMAN-EVALUATED
 └── README.md       # what the pack does, how to run it
 ```
 
@@ -16,7 +16,7 @@ packs/<name>/
 
 | Pack | Guard | xOP | Status |
 |---|---|---|---|
-| `writing` | `no-ai-tells` (vocabulary + construction tells) | writing-license | Guard: `RULE-TESTED` 12/12 · xOP: `HELD` |
+| `writing` | `no-ai-tells` (vocabulary + construction tells) | writing-license | Guard: `RULE-TESTED` 12/12 · xOP: `DESIGNED` |
 
 ## Running a pack
 
