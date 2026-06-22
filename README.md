@@ -120,9 +120,9 @@ fallible judges). **Receipts, not vibes.**
 ## The family
 
 - **xOP Standard** — the open format for reusable AI operating rules *(this repo)*
-- **xOP Kit** — makes them testable and runnable *(awakenfyi/xop-kit)*
-- **Lyra** — authors, suggests, and installs them *(the `xop-author` skill)*
-- **Work Packs** — turn rules into complete systems for real jobs
+- **xOP Kit** — makes them testable and runnable *([awakenfyi/xop-kit](https://github.com/awakenfyi/xop-kit))*
+- **Lyra** — the inference core this standard is built on: coherence metric, drift memory, `L = x − x̂` *([awakenfyi/lyra](https://github.com/awakenfyi/lyra))*
+- **Work Packs** — turn rules into complete systems for real jobs *(Leadership OS, Reliable Delivery OS, …)*
 
 ## You don't have to be a developer
 

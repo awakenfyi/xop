@@ -1,5 +1,9 @@
 # Proposed Core Set v0.1 — DESIGNED
 
+> **Shape of this file:** Machine-readable per-xOP objects (`<id>/xop.yaml` + `index.yaml`) are
+> `PLANNED` (Phase 2/3 of the build). This reference doc is the current source of truth until
+> those objects exist.
+
 > **Status: every xOP below is `DESIGNED`** (proposed, not yet recommended). Well-formed, not
 > validated; none piloted; each names its own evaluation plan. The small reusable core — departments
 > are **profiles** under these, never new files per role. After contracts survive evaluation and
