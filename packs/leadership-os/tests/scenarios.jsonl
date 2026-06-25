@@ -1,1 +1,0 @@
-{"deprecated": true, "reason": "answer key was inline (expect/opposite_error) — leaked if uploaded to the tested Project", "use_instead": ["stimuli.jsonl (public, no answers)", "gold.private.jsonl (hidden, gitignored)", "rubric.md (evaluator)"]}

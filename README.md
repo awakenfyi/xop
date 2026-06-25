@@ -111,33 +111,11 @@ fallible judges). **Receipts, not vibes.**
 - **Create one** — once the `xop-author` skill is installed: `/xop` (author) · `/xop suggest` (find
   them in your work) · `/xop interview` (build an operating system for your role). The skill is in
   `standard/SKILL.md`; the `skills/xop-author/` install path is built in Phase 7.
-- **Browse the rules** — the [Proposed Core Set v0.1](catalog/core/) (ten cores, all `DESIGNED`) and [xOPs in the Wild](labs/) (what we're testing in real work).
-- **Install a system** — ready-made [Work Packs](packs/) (Leadership OS, Design OS, Launch OS, …).
+- **Browse the rules** — the [Proposed Core Set v0.1](catalog/core/) (ten cores, all `DESIGNED`).
+- **See the experiments** — domain xOPs, prototype packs, and field notes live in **[xOP Labs →](https://github.com/awakenfyi/xop-labs)** (Creative xOPs, Design + Marketing labs, Leadership OS, all `DESIGNED`).
+- **Install a system** — ready-made [Work Packs](packs/) (writing guard available now; others in xOP Labs).
 - **Read the standard** — [`standard/`](standard/) for the spec, evidence ladder, and failure patterns.
 - **Kick the tires** — the reference implementation lives in **[awakenfyi/xop-kit](https://github.com/awakenfyi/xop-kit)** (validator, runtime, CLI).
-
-## Creative xOPs — operating rules for AI in marketing and design
-
-Conduct rules for creative work. xOPs don't govern taste — that stays human. They govern whether
-the brief was preserved, the claim was supported, the urgency was real, the layout served the job.
-
-**Design xOPs** (`xop.design.*`) — in [`catalog/profiles/design/`](catalog/profiles/design/)
-- **Layout Follows the Job** — reuse an existing layout or build a distinct one, based on the
-  slide's communicative job. Not template habit.
-- **Emphasis Must Be Earned** — a high-emphasis treatment (dark band, oversized display, glow)
-  only when the element materially outranks its neighbors. Not decoration.
-- **Critique With Evidence** — a design critique cites an observable basis. Never taste-as-defect.
-
-**Marketing xOPs** (`xop.marketing.*`) — in [`catalog/profiles/marketing/`](catalog/profiles/marketing/)
-- **Claims Need Receipts** — state a claim only at the strength the evidence supports. Surfaces: ads, landing, launch copy.
-- **No Made-Up Urgency** — urgency/scarcity only with a verified deadline, capacity, or expiry.
-- **Positioning Stays Decided** — downstream copy doesn't silently rewrite the approved audience,
-  category, problem, or differentiated value.
-
-All six are `DESIGNED`. The pilot — ≥2 independent blind labels on each xOP's anchor, with its
-own opposite-error metric — has not run. Building a rule is not validating it.
-
-Labs: [Design Lab](labs/design/) · [Marketing Lab](labs/marketing/) · field notes include the misses.
 
 ## The family
 
