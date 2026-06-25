@@ -77,7 +77,7 @@ the opposite error matters · it isn't just a fixed Guard or a how-to Skill · a
 reviewing, revising, or retiring it. There's no universal pass mark — each Lab xOP carries its own
 evaluation plan and its own opposite-error control.
 
-## First lab: CMO Design Lab
+## First lab: Design Lab
 
 The operating rules I'm developing for brand, design, and conversion work. An xOP won't give a model
 taste — that stays human judgment. It can stop the model from overriding my taste without a reason,

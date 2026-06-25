@@ -1,0 +1,91 @@
+api_version: xop.dev/v1alpha1
+kind: XOP
+
+metadata:
+  id: xop.design.emphasis-license
+  version: 0.1.0
+  title: Emphasis Must Be Earned
+  public_name: Emphasis Must Be Earned
+  domain: design            # "Design xOPs" — namespace xop.design.*, not a family letter
+  profile: visual.treatment
+  status: DESIGNED
+  lab: design
+
+spec:
+  type: decision
+
+  purpose: >
+    Prevent decoration from masquerading as signal hierarchy — a high-emphasis treatment
+    (dark band, oversized display, motion, glow, elevated card) is used only when the moment
+    materially outranks its neighbors — without suppressing treatments that genuinely serve
+    a dominant moment.
+
+  # This is the Arcade-merge rule: both directions fail.
+  # Too much emphasis = decoration as signal. Too little = brand and hero never land.
+
+  scope:
+    applies_when:
+      - a high-emphasis treatment is being considered (dark band, oversized display, motion, glow, elevated card, hero overrides)
+      - the element could plausibly be either the primary signal or one of several competing for attention
+      - the treatment materially changes the visual hierarchy of the page or screen
+    does_not_apply_when:
+      - the treatment is explicitly specified in the brief or locked design system
+      - no visual competition exists (single-surface layout with one element)
+      - the treatment is a systematic token (color, spacing) rather than an emphasis decision
+
+  required_context:
+    - element_and_treatment_under_consideration
+    - surrounding_elements_and_their_treatments
+    - page_goal_and_primary_user_task
+    - brand_hierarchy_if_defined
+
+  observable_signals:
+    material_rank: Does this element materially outrank its neighbors for the page goal and user task?
+    decoration_signal: Is the treatment adding signal to hierarchy, or filling visual space?
+    hierarchy_outcome: With this treatment applied, is the intended primary message still the primary signal?
+    page_legibility: Can a cold reader identify the primary element and action without the decoration?
+
+  decisions:
+    apply_emphasis:
+      when: The element materially outranks its neighbors for the page goal; the treatment is the clearest path to signal that rank.
+      action: Apply the treatment. Record which element it ranks above and why.
+    hold_restraint:
+      when: The element does not materially outrank its neighbors; the treatment is for visual interest rather than signal hierarchy.
+      action: Hold the treatment. Use the existing type/surface hierarchy without added emphasis.
+    ask:
+      when: The page goal or the element's rank relative to neighbors cannot be determined from the brief or context.
+      action: Preserve the current hierarchy, identify the missing decision, and request clarification.
+
+  never_break: >
+    Never apply a high-emphasis treatment when the element does not materially outrank its
+    neighbors; decoration is not signal hierarchy.
+
+  opposite_error: >
+    Never produce a page so restrained that the hero, brand, or primary CTA fails to read as
+    primary; restraint without signal is invisibility, not quality.
+
+  on_abstain:
+    artifact_action: preserve_current_hierarchy
+    release_action: hold_treatment_decision
+    route: designer_review
+
+  # No universal gate. Report these separately; never blend into one score.
+  evaluation:
+    sample: 30-50 design pairs — treatment applied vs withheld — including both over-emphasis and under-emphasis cases, holdouts the author never labeled
+    labelers: ">=2 independent designers, blind to the original treatment decision"
+    labels: [emphasis_warranted, emphasis_decoration, undecidable]
+    ground_truth: page goal + user task statement + element rank in the brief
+    metrics:
+      decoration_rate:
+        kind: primary
+        desc: A non-warranted treatment was applied; emphasis added without rank justification.
+      invisibility_rate:
+        kind: opposite
+        desc: A warranted treatment was withheld; the intended primary element did not read as primary.
+      forced_decision_rate:
+        kind: forced
+        desc: Rank was unclear, but a treatment decision was made anyway.
+      abstain_rate:
+        kind: abstain
+        desc: The system deferred because page goal or element rank was genuinely undecidable.
+    report: separately — there is no single "emphasis accuracy score"

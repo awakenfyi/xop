@@ -1,0 +1,89 @@
+api_version: xop.dev/v1alpha1
+kind: XOP
+
+metadata:
+  id: xop.claim.evidence-bound
+  version: 0.1.0
+  title: Claims Need Receipts
+  public_name: Claims Need Receipts
+  domain: marketing
+  profile: marketing.copy       # profile of the core xop.claim.evidence-bound; not a new primitive
+  status: DESIGNED
+  lab: marketing
+  extends: xop.claim.evidence-bound   # core definition in catalog/core/CORE_REFERENCE_xOPS.md
+
+spec:
+  type: decision
+
+  purpose: >
+    In marketing copy (ads, landing pages, launch copy), state a claim only at the strength
+    the evidence supports — without stripping true, sourced claims through over-hedging.
+
+  # This is a marketing profile of the core Claims Need Receipts xOP.
+  # The core governs any factual claim. This profile adds marketing-specific context:
+  # performance claims, comparative claims, stat citations, superlatives, social proof.
+
+  scope:
+    applies_when:
+      - producing or reviewing marketing copy containing factual, comparative, performance, or superlative claims
+      - a claim is being made about results, customer outcomes, speed, accuracy, cost, or competitive position
+      - social proof, testimonials, or statistics are cited
+    does_not_apply_when:
+      - the copy is explicitly aspirational brand voice without factual claim (slogans, emotional hooks)
+      - the claim is an explicit hypothesis or forward projection clearly labeled as such
+
+  required_context:
+    - the_claim_as_written
+    - the_evidence_or_source_behind_it
+    - the_channel_and_audience
+    - any_approved_claim_library_or_legal_review
+
+  observable_signals:
+    evidence_present: Is there a source, study, customer evidence, or internal data that supports this claim at the stated strength?
+    claim_strength: What strength is the claim implying — directional, comparative, superlative, exact?
+    strength_match: Does the claim strength match what the evidence actually supports?
+
+  decisions:
+    state_claim:
+      when: The evidence supports the claim at the stated strength. Source exists, claim strength matches evidence strength.
+      action: State the claim. Reference the source if channel permits.
+    weaken_or_qualify:
+      when: Evidence exists but supports a weaker form. Source is indirect, sample is small, or certainty overstated.
+      action: Weaken or qualify the claim to match evidence strength. Note the change.
+    ask:
+      when: Claim is material but evidence basis is not provided or unclear.
+      action: Surface the gap. Do not write or approve the claim until the source is established.
+
+  never_break: >
+    Never fabricate a source, statistic, customer outcome, or certainty level; never use
+    unsupported superlatives or unqualified comparative claims.
+
+  opposite_error: >
+    Never strip a true, sourced claim through over-hedging; weakening a well-supported claim
+    is also a failure — it misrepresents the evidence in the other direction.
+
+  on_abstain:
+    artifact_action: flag_claim_for_review
+    release_action: hold_copy_containing_claim
+    route: copy_legal_review
+
+  # No universal gate. Report these separately; never blend into one score.
+  evaluation:
+    sample: 50-80 marketing claims — labeled by source-to-claim relationship; include both unsupported claims and over-hedged supported ones
+    labelers: ">=2 independent reviewers with access to source material, blind to the original copy decision"
+    labels: [claim_supported_at_stated_strength, claim_overstated, claim_over_hedged, no_source_available]
+    ground_truth: source documents, approved claim library, or legal review record
+    metrics:
+      unsupported_claim_rate:
+        kind: primary
+        desc: Claim stated stronger than evidence supports.
+      over_hedged_rate:
+        kind: opposite
+        desc: A true, supported claim was weakened or qualified unnecessarily.
+      forced_decision_rate:
+        kind: forced
+        desc: Evidence gap was present but claim was stated anyway.
+      abstain_rate:
+        kind: abstain
+        desc: The system deferred because the source basis was genuinely unclear.
+    report: separately — there is no single "claim accuracy score"

@@ -6,6 +6,7 @@ harness/phase1/gold.json
 __pycache__/
 *.pyc
 .DS_Store
+.fuse_hidden*
 .claude/
 
 # Kept on disk, out of the published spine (see REPO_STATE.md).
@@ -29,3 +30,7 @@ meta/
 
 # build/ inventory artifacts — generated, not normative
 build/
+
+# HELD — not ready; do not commit until shipped with Basis Thinking
+labs/basis-thinking/
+catalog/profiles/marketing/benchmark-fit.yaml

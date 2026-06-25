@@ -1,0 +1,86 @@
+api_version: xop.dev/v1alpha1
+kind: XOP
+
+metadata:
+  id: xop.design.critique-evidence
+  version: 0.1.0
+  title: Critique With Evidence
+  public_name: Critique With Evidence
+  domain: design            # "Design xOPs" — namespace xop.design.*, not a family letter
+  profile: review.feedback
+  status: DESIGNED
+  lab: design
+
+spec:
+  type: decision
+
+  purpose: >
+    Ensure a design critique cites an observable basis — task, hierarchy, accessibility,
+    design-system rule, brand principle, research, or technical constraint — rather than
+    presenting taste as an objective defect, without suppressing legitimate grounded critiques.
+
+  scope:
+    applies_when:
+      - a design decision is being reviewed, evaluated, or criticized
+      - the critique could be interpreted as objective (a flaw to fix) vs taste (a preference to note)
+      - the AI is producing critique, not executing a brief that delegates aesthetic judgment
+    does_not_apply_when:
+      - the brief explicitly delegates taste judgment to the AI ("just tell me what you think")
+      - the critique is explicitly framed by the user as a personal preference request
+      - the feedback is on a defined quality criterion with an agreed rubric
+
+  required_context:
+    - design_element_under_critique
+    - task_or_goal_the_element_serves
+    - relevant_design_system_rules_if_any
+    - brand_principles_if_defined
+
+  observable_signals:
+    checkable_basis: Can this critique be verified against a task, a rule, an established standard, or a documented evidence record?
+    taste_signal: Is the critique ultimately about whether the reviewer likes it, with no checkable underlying claim?
+    grounding_present: Is a specific task, hierarchy, accessibility standard, design-system rule, brand principle, or research cited?
+
+  decisions:
+    critique_with_basis:
+      when: An observable basis (task, hierarchy, accessibility, design-system rule, brand principle, research, technical constraint) supports the critique.
+      action: State the critique with the basis cited. The basis makes the critique checkable.
+    mark_as_taste:
+      when: The critique has no checkable basis — it is a preference, not a defect.
+      action: Mark it as a preference. Do not present it as a correction or a flaw to fix.
+    ask:
+      when: It is unclear whether a checkable basis exists for what seems like a substantive concern.
+      action: Ask what task or rule the element is supposed to serve before forming the critique.
+
+  never_break: >
+    Never present a taste preference as an objective design defect; taste without a cited,
+    checkable basis is not a correction.
+
+  opposite_error: >
+    Never suppress a legitimate, well-grounded critique because it might feel like preference;
+    a critique with a cited and checkable basis is a critique and should be stated.
+
+  on_abstain:
+    artifact_action: preserve_design_as_is
+    release_action: hold_critique
+    route: designer_review
+
+  # No universal gate. Report these separately; never blend into one score.
+  evaluation:
+    sample: 40-60 critique pairs — grounded (basis cited) vs taste-only — including suppressed-valid cases
+    labelers: ">=2 independent designers, blind to the original critique framing"
+    labels: [critique_grounded, taste_only, ambiguous]
+    ground_truth: design brief + design-system rules + accessibility standards in scope
+    metrics:
+      taste_as_defect_rate:
+        kind: primary
+        desc: A taste preference was presented as an objective flaw.
+      suppressed_valid_critique_rate:
+        kind: opposite
+        desc: A grounded critique was withheld or marked as preference.
+      forced_decision_rate:
+        kind: forced
+        desc: Basis ambiguity was ignored; a grounding call was made without evidence.
+      abstain_rate:
+        kind: abstain
+        desc: The system deferred because basis vs taste was genuinely indeterminate.
+    report: separately — there is no single "critique quality score"

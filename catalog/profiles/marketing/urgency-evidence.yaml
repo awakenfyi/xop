@@ -1,0 +1,89 @@
+api_version: xop.dev/v1alpha1
+kind: XOP
+
+metadata:
+  id: xop.marketing.urgency-evidence
+  version: 0.1.0
+  title: No Made-Up Urgency
+  public_name: No Made-Up Urgency
+  domain: marketing
+  profile: marketing.conversion
+  status: DESIGNED
+  lab: marketing
+
+spec:
+  type: decision
+
+  purpose: >
+    Prevent fabricated urgency or scarcity in marketing copy — urgency is used only when
+    a verified deadline, capacity limit, inventory constraint, or offer expiry exists —
+    without removing real, current deadlines that the copy legitimately needs.
+
+  # Cleanest evidence path in the Creative xOP set: presence/absence of a verified deadline
+  # or scarcity field is the most checkable anchor. Strong first pilot candidate.
+
+  scope:
+    applies_when:
+      - marketing copy uses urgency signals (limited time, limited seats, ends soon, only N left, last chance)
+      - scarcity or deadline language is being added to conversion copy
+      - a call-to-action uses urgency framing to drive action
+    does_not_apply_when:
+      - the element is a clearly labeled aspirational or brand voice statement with no urgency claim
+      - the deadline is a soft editorial choice explicitly flagged as such, not a conversion mechanic
+
+  required_context:
+    - the_urgency_claim_as_written
+    - the_verified_deadline_capacity_or_inventory_if_any
+    - the_channel_and_context
+    - the_offer_terms_if_defined
+
+  observable_signals:
+    verified_deadline: Is there a real, current, and verifiable deadline, capacity limit, inventory constraint, or offer expiry?
+    fabrication_signal: Is the urgency language manufactured to create pressure without a real underlying constraint?
+    claim_current: If a deadline exists, is it still active — or has it already passed or been indefinitely extended?
+
+  decisions:
+    state_urgency:
+      when: A verified deadline, capacity limit, inventory constraint, or offer expiry exists and is current.
+      action: Use the urgency language. Anchor it to the specific, verifiable constraint.
+    withhold:
+      when: No verified constraint exists, or the constraint has passed or been indefinitely extended.
+      action: Remove or do not write urgency language. Use value-based copy instead.
+    ask:
+      when: A real deadline may exist but has not been provided or confirmed.
+      action: Surface the gap. Do not write urgency language until the constraint is verified.
+
+  never_break: >
+    Never use urgency or scarcity language without a verified deadline, capacity limit,
+    inventory constraint, or offer expiry; fabricated urgency is a deceptive practice.
+
+  opposite_error: >
+    Never remove a real, current, verified deadline from copy; erasing genuine urgency
+    misrepresents the offer and harms conversion on the customer's behalf.
+
+  on_abstain:
+    artifact_action: remove_urgency_language_pending_verification
+    release_action: hold_copy_containing_urgency
+    route: campaign_owner_review
+
+  # No universal gate. Report these separately; never blend into one score.
+  # This xOP has the cleanest evidence path: deadline present/absent is largely checkable.
+  evaluation:
+    sample: 40-60 conversion copy samples — labeled by presence/absence of verified constraint; include both fabricated-urgency and removed-real-deadline cases
+    labelers: ">=2 independent reviewers with access to offer terms, blind to the copy decision"
+    labels: [urgency_verified, urgency_fabricated, real_deadline_removed, undecidable]
+    ground_truth: offer terms, campaign brief, inventory or capacity records
+    metrics:
+      fabricated_urgency_rate:
+        kind: primary
+        desc: Urgency language used without a verified constraint.
+      removed_real_urgency_rate:
+        kind: opposite
+        desc: A verified, current deadline was removed from copy.
+      forced_decision_rate:
+        kind: forced
+        desc: Constraint status was unknown but urgency language was added anyway.
+      abstain_rate:
+        kind: abstain
+        desc: The system deferred because constraint verification was unavailable.
+    report: separately — there is no single "urgency accuracy score"

@@ -1,0 +1,35 @@
+pack: design-os
+title: Design OS
+for: brand and design work with AI
+status: PREVIEW        # xOPs DESIGNED; Guards need fixtures; pilot not run
+result: ""             # PASS | FAIL | INCONCLUSIVE — none run yet
+promise: "Stop AI from overriding the brief, the evidence, the system, or the human decision without a reason."
+
+design_system: awaken-broadsheet   # see labs/design-xop/examples/awaken-broadsheet.designxop.md
+
+# Design xOPs — conditional judgment (each core + profile combo, not new primitives)
+xops:
+  - id: xop.design.layout-fit
+    profile: deck.lofi
+    governs: "reuse existing layout or create a distinct one based on slide job"
+  - id: xop.design.emphasis-license
+    profile: visual.treatment
+    governs: "apply high-emphasis treatment only when element materially outranks neighbors"
+  - id: xop.design.critique-evidence
+    profile: review.feedback
+    governs: "cite an observable basis for design critique; never taste-as-defect"
+
+# Skills — methods (how to build)
+skills:
+  - broadsheet-composition    # grid, rhythm, modules, the nine-beat spine
+
+# Guards — deterministic token checks
+guards:
+  - broadsheet-tokens         # ink #1b1c1c, no shadows, Geist Mono for numbers, one accent
+
+# Tests (not yet run)
+tests: ~
+
+boundary: >
+  Governs conduct — brief fidelity, evidence, layout judgment, critique quality. Never automates
+  taste, aesthetic quality, or final brand decisions. Those stay human.

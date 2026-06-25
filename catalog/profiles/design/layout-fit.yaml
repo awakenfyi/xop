@@ -1,0 +1,114 @@
+api_version: xop.dev/v1alpha1
+kind: XOP
+
+metadata:
+  id: xop.design.layout-fit
+  version: 0.2.0
+  title: Layout Follows the Job
+  public_name: Layout Follows the Job
+  domain: design            # "Design xOPs" — namespace xop.design.*, not a family letter
+  profile: deck.lofi
+  status: DESIGNED
+  lab: design
+
+spec:
+  type: decision
+
+  purpose: >
+    Prevent template habit from flattening the communicative job of a source
+    slide, without creating needless one-off layouts.
+
+  # Lyra lineage note (NOT normative arithmetic):
+  # observe the slide (x) before reaching for the template (x̂); subtract the
+  # default assumption; then choose the layout. Kept as lineage, not a gate.
+
+  scope:
+    applies_when:
+      - a source slide has an inferable audience job
+      - two or more layouts could plausibly serve it
+      - the choice between reuse and a distinct layout affects meaning, hierarchy, or comprehension
+    does_not_apply_when:
+      - the designer explicitly selected the layout
+      - an exact mapping rule resolves the placement
+      - no meaningful layout choice exists
+
+  required_context:
+    - source_slide_image
+    - extracted_source_text
+    - slide_position_in_deck
+    - surrounding_slides
+    - available_layout_library
+    - current_deck_grammar
+
+  observable_signals:
+    slide_job: What this slide must do for the audience.
+    hierarchy: Which element is primary, supporting, sequential, comparative, evidentiary, or transitional.
+    candidate_layout: The existing or proposed layout being considered.
+    loss_if_defaulted: What meaning, emphasis, sequence, or visual proof would disappear if the default layout were used.
+
+  decisions:
+    reuse_existing:
+      when: An existing layout preserves the slide job and hierarchy.
+      action: Use that layout and cite why it fits.
+    create_distinct:
+      when: No existing layout preserves a material part of the slide job.
+      action: Create a named layout and register its future use condition.
+    ask:
+      when: The slide job or audience is genuinely unreadable.
+      action: Preserve the source hierarchy, identify the missing decision, and request clarification.
+
+  never_break: >
+    Never claim fidelity while removing the source slide's communicative job.
+
+  opposite_error: >
+    Never create a new layout when an existing layout already preserves the job and hierarchy.
+
+  on_abstain:
+    artifact_action: preserve_source_structure
+    release_action: hold_layout_choice
+    route: designer_review
+
+  # No universal gate. Report these separately; never blend into one score.
+  evaluation:
+    sample: 40-60 real source/rebuild slide pairs, including holdout cases the author never saw
+    labelers: ">=2 independent designers, blind to the builder's chosen layout"
+    labels: [reuse_existing, distinct_required, undecidable]
+    metrics:
+      flattening_rate:
+        kind: primary
+        desc: A distinct layout was warranted, but an unsuitable existing layout was used.
+      layout_proliferation_rate:
+        kind: opposite
+        desc: An existing layout was sufficient, but a new one was created.
+      forced_decision_rate:
+        kind: forced
+        desc: Intent was unclear, but the system selected a layout anyway.
+      abstain_rate:
+        kind: abstain
+        desc: The system deferred because intent was genuinely unreadable.
+      human_agreement:
+        kind: calibration
+        desc: Reviewers agreed on reuse / distinct / unclear.
+      comprehension_result:
+        kind: calibration
+        desc: The intended primary message and action remained identifiable.
+    report: separately — there is no single "layout fidelity score"
+
+# --- example output contract (decision, not enforcement) ---
+# {
+#   "slide_id": "07",
+#   "decision": "create_distinct",
+#   "slide_job": "mark the transition from market problem to product architecture",
+#   "selected_layout": "act-divider-centered",
+#   "existing_layouts_considered": ["slide-content", "act-divider-sidebar"],
+#   "loss_if_defaulted": ["the act change no longer reads as a transition",
+#                         "the numeral becomes secondary rather than declarative"],
+#   "evidence_refs": ["source-slide-07-image", "preceding-slide-06", "following-slide-08"],
+#   "confidence": 0.84,
+#   "human_review_required": false
+# }
+#
+# The xOP DECIDES (reuse/create/ask). The build system ENFORCES:
+#   reuse_existing  -> instantiate the selected library layout
+#   create_distinct -> create + register a named new layout
+#   ask             -> preserve source hierarchy, wait (never force the default to keep building)
