@@ -75,7 +75,7 @@ No install, no doc, and no launch advances a status — only evidence does. We p
 | Repo | What | Status |
 |---|---|---|
 | [xop](https://github.com/awakenfyi/xop) *(this repo)* | the standard: contract, constitution, catalog, benchmarks | alpha |
-| [xop-kit](https://github.com/awakenfyi/xop-kit) | reference implementation: Guards, CLI, orchestrator | alpha, `pip install xop-kit` |
+| [xop-kit](https://github.com/awakenfyi/xop-kit) | reference implementation: Guards, CLI, orchestrator | alpha, `git clone` + `pip install -e .` |
 | [lyra](https://github.com/awakenfyi/lyra) | the formula and inference core: `L = x − x̂` at activation depth | research code |
 
 *(This table is canonical — the same table appears in every family README.)*
