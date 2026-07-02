@@ -1,15 +1,16 @@
 # xOP
 
-[license: MIT] [status: alpha] [gate: unvalidated — pilot recruiting]
+**The open standard for AI conduct** — the rule that decides when an agent keeps going, changes course, asks, stops, or hands off. Skills teach the work; xOP bounds the judgment.
 
-## You correct the same thing every session. Write it once.
+![MIT](https://img.shields.io/badge/license-MIT-blue) ![alpha](https://img.shields.io/badge/status-alpha%20·%20gate%20unvalidated-orange)
 
-Prompts tell AI **what** you want. Skills teach it **how**. But two corrections keep coming back, and they run in opposite directions:
+```bash
+pip install git+https://github.com/awakenfyi/xop-kit
+echo "Great question! I'd be happy to help with that." | xop scan --pack writing -
+xop test        # 95/95 deterministic fixtures (from a git checkout)
+```
 
-- *It caved.* The pushback was right, the pressure was social, and the AI folded anyway.
-- *It won't let go.* You fixed the thing it flagged, and it's still flagging it.
-
-Same bug, two directions: **a stance running on what was true instead of what is.** An xOP is the operating rule for exactly that judgment — when a stance applies, what should change it, and the one line it never crosses.
+Two corrections keep coming back, in opposite directions: **it caved** (folded under pressure that was only social) and **it won't let go** (kept flagging after you fixed it). Same bug — a stance running on what *was* true instead of what *is*. An xOP is the rule for that judgment.
 
 ## The one question
 
@@ -72,13 +73,12 @@ No install, no doc, and no launch advances a status — only evidence does. We p
 
 ## The family
 
-| Repo | What | Status |
+| Repo | One line | Status |
 |---|---|---|
-| [xop](https://github.com/awakenfyi/xop) *(this repo)* | the standard: contract, constitution, catalog, benchmarks | alpha |
-| [xop-kit](https://github.com/awakenfyi/xop-kit) | reference implementation: Guards, CLI, orchestrator | alpha, `git clone` + `pip install -e .` |
-| [lyra](https://github.com/awakenfyi/lyra) | the formula and inference core: `L = x − x̂` at activation depth | research code |
-
-*(This table is canonical — the same table appears in every family README.)*
+| [lyra](https://github.com/awakenfyi/lyra) | the formula + inference core (`L = x − x̂`) | research code |
+| [xop](https://github.com/awakenfyi/xop) *(this repo)* | the open standard for AI conduct | alpha |
+| [xop-kit](https://github.com/awakenfyi/xop-kit) | the reference runtime: Guards, CLI | alpha |
+| [xop-labs](https://github.com/awakenfyi/xop-labs) | domain xOPs observed in the wild | designed |
 
 ## Where to go
 
