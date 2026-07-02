@@ -7,7 +7,8 @@ xOPs can be regression-tested across model upgrades.
 ## [0.3.0] — 2026-07-01 — the benchmark release
 
 ### Added
-- **`benchmarks/`** — the three-track suite (WARRANT / LOOP / BRIDGE): gate + floor per track, no pooled scores, seed duets included as author-labeled scaffold.
+- **`benchmarks/`** — the three-track suite (WARRANT / LOOP / BRIDGE): gate + floor per track, no pooled scores.
+- **`benchmarks/duets/agreement.seed.json`** — 27 seed cases (12 held-response-constant pairs + 3 undecidables), `blind:false` author-labeled scaffold. Not a benchmark — a starting point for the Phase 3 gold pipeline.
 - **The duet** as the canonical evaluation unit: held-response-constant minimal pairs; `lexical_floor` scores AUC 0.5 by construction.
 - **`docs/CONDUCT-DIRECTORY.md`** — the `xops/` folder convention positioned against Eve; hold/drop fixtures per rule; comparison table.
 - **`docs/STANDARD-EXPANSION.md`** — the wire format strategy: JSON Schemas, skills-rail wedge, three adapters, conformance suite.

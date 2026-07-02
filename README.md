@@ -28,7 +28,7 @@ Never override a state that is still warranted — not a real caution, not a sco
 ## Try it in 60 seconds
 
 ```bash
-pip install xop-kit
+pip install git+https://github.com/awakenfyi/xop-kit
 
 echo "Great question! I'd be happy to help with that." | xop scan --pack writing -
 xop test        # 95/95 deterministic fixtures
