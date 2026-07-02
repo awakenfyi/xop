@@ -4,6 +4,26 @@ All notable changes to the xOP standard are recorded here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); this project is pre-1.0 and versions are pinned so
 xOPs can be regression-tested across model upgrades.
 
+## [0.3.0] — 2026-07-01 — the benchmark release
+
+### Added
+- **`benchmarks/`** — the three-track suite (WARRANT / LOOP / BRIDGE): gate + floor per track, no pooled scores, seed duets included as author-labeled scaffold.
+- **The duet** as the canonical evaluation unit: held-response-constant minimal pairs; `lexical_floor` scores AUC 0.5 by construction.
+- **`docs/CONDUCT-DIRECTORY.md`** — the `xops/` folder convention positioned against Eve; hold/drop fixtures per rule; comparison table.
+- **`docs/STANDARD-EXPANSION.md`** — the wire format strategy: JSON Schemas, skills-rail wedge, three adapters, conformance suite.
+- **Linked `FORMULA.md`** (lyra repo) as the single definition of the residual; READMEs no longer redefine x and x̂.
+- **Unified the family table** across xop / xop-kit / lyra (canonical — same text in every README).
+- **Opened the pilot**: public recruitment of blind labelers per `LABEL_PROTOCOL.md`; tracked in issues.
+
+### Changed
+- `README.md` — v2: leads with the two-directions framing (caved / won't let go), benchmark section with three-track table, per-component status table, pilot-recruiting section.
+- **Removed** the not-yet-installable `/xop` skill quickstart (returns when the install path ships — a quickstart that doesn't run is a claim without evidence).
+
+### Status note
+Gate remains `DESIGNED`/unvalidated; this release changes what can be *tested*, not what is *proven*.
+
+---
+
 ## [Unreleased] — PR 0 cleanup (2026-06-21)
 
 ### Fixed
